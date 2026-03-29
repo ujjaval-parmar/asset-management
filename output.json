@@ -1,0 +1,1789 @@
+{
+  "employees": [
+    {
+      "name": "Priyanka Patel",
+      "joiningDate": "26-May-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Jaydeep Sosa",
+      "joiningDate": "17-Feb-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Sandip Rathod",
+      "joiningDate": "17-Feb-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Aarti Kushwaha",
+      "joiningDate": "05-Mar-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Vishal Mali",
+      "joiningDate": "12-Dec-2024",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Nimesh Mishra",
+      "joiningDate": "12-Dec-2024",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Anchal Kumari",
+      "joiningDate": "5th dec 2024",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Ujjaval Parmar",
+      "joiningDate": "19-Nov-2024",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Dolly Sanchaniya",
+      "joiningDate": "24-Feb-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Rahul Thakor",
+      "joiningDate": "11-Nov-2024",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Smit Parmar",
+      "joiningDate": "24-Feb-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Chirag Ramani",
+      "joiningDate": "30-Jan-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Priyal Ghetiya",
+      "joiningDate": "24-Feb-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Jaymin Raval",
+      "joiningDate": "12-Jun-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Shubham Patidar",
+      "joiningDate": "07-Jul-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Parita Shah",
+      "joiningDate": "10-Jul-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Rushik Joshi",
+      "joiningDate": "21-Jul-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Jay Soni",
+      "joiningDate": "18-Aug-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Anjali Mevada",
+      "joiningDate": "15-Sep-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Sanskar Jaiswal",
+      "joiningDate": "25-Sep-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Bhagyesh Bhalodiya",
+      "joiningDate": "27-Oct-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Hiral Patel",
+      "joiningDate": "27-Oct-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Prashant Gohil",
+      "joiningDate": "27-Oct-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Mit Prajapati",
+      "joiningDate": "10-Nov-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Chaitanya Patel",
+      "joiningDate": "24-Nov-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Upasana Bhure",
+      "joiningDate": "15-Dec-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Sujal Prajapati",
+      "joiningDate": "23-Dec-2025",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Radhika Baldaniya",
+      "joiningDate": "05-Jan-2026",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Divya Rojiwadiya",
+      "joiningDate": "05-Jan-2026",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Kartik Jagad",
+      "joiningDate": "08-Jan-2026",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Hardik Jain",
+      "joiningDate": "19-Jan-2026",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Himanshu Patanvadiya",
+      "joiningDate": "19-Jan-2026",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Nilesh Kanzariya",
+      "joiningDate": "19-Jan-2026",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Vrutik Vasoya",
+      "joiningDate": "20-Jan-2026",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Premal Bhatt",
+      "joiningDate": "22-Jan-2026",
+      "systemOwner": "Binary",
+      "status": "Active"
+    },
+    {
+      "name": "Mahesh Parmar",
+      "joiningDate": "12-Feb-2026",
+      "systemOwner": "Binary",
+      "status": "Active"
+    }
+  ],
+  "assets": [
+    {
+      "assetTag": "LAP-007",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Priyanka Patel",
+      "properties": {
+        "brandModel": "Dell"
+      }
+    },
+    {
+      "assetTag": "MOB-001",
+      "type": "mobile",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Priyanka Patel",
+      "properties": {
+        "brandModel": "Redmi 14C",
+        "serialNumber": "60380/X5RT00145",
+        "imei1": "860894078647083",
+        "imei2": "860894078647091",
+        "simNumber": "7383315759"
+      },
+      "purchase": {
+        "price": 10000
+      }
+    },
+    {
+      "assetTag": "LAP-001",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Aarti Kushwaha",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "0272098-001045"
+      }
+    },
+    {
+      "assetTag": "LAP-002",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Vishal Mali",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "9GSGWD2"
+      }
+    },
+    {
+      "assetTag": "LAP-003",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Nimesh Mishra",
+      "properties": {
+        "brandModel": "MacOS",
+        "serialNumber": "C02PD3H6G3QC",
+        "simNumber": "9653660446"
+      }
+    },
+    {
+      "assetTag": "LAP-004",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Anchal Kumari",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "HFF85M2"
+      }
+    },
+    {
+      "assetTag": "LAP-018",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Ujjaval Parmar",
+      "properties": {
+        "brandModel": "Mac Apple",
+        "serialNumber": "CO2D3CVQMD6M"
+      }
+    },
+    {
+      "assetTag": "MOB-003",
+      "type": "mobile",
+      "category": "device",
+      "status": "Good",
+      "ownership": "office",
+      "assignedTo": null,
+      "properties": {
+        "brandModel": "Redmi 8A",
+        "serialNumber": "12.5.2.0(QCPINXM)",
+        "imei1": "869956044332271",
+        "imei2": "869956044332289",
+        "simNumber": "9324933964"
+      },
+      "purchase": {
+        "price": 8500
+      }
+    },
+    {
+      "assetTag": "MOB-002",
+      "type": "mobile",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Ujjaval Parmar",
+      "properties": {
+        "brandModel": "Redmi A4 5G",
+        "serialNumber": "60363/X4YU08529",
+        "imei1": "863298075332227",
+        "imei2": "863298075332235",
+        "simNumber": "9653660428"
+      },
+      "purchase": {
+        "price": 8000
+      }
+    },
+    {
+      "assetTag": "LAP-008",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Dolly Sanchaniya",
+      "properties": {
+        "brandModel": "Dell Latitude 7480",
+        "serialNumber": "7ZG6PL2"
+      }
+    },
+    {
+      "assetTag": "LAP-026",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Smit Parmar",
+      "properties": {
+        "brandModel": "Mac",
+        "serialNumber": "C02X25HTJHC9"
+      }
+    },
+    {
+      "assetTag": "DES-001",
+      "type": "desktop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Chirag Ramani",
+      "properties": {}
+    },
+    {
+      "assetTag": "MOB-VARIOUS",
+      "type": "mobile",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Chirag Ramani",
+      "properties": {}
+    },
+    {
+      "assetTag": "LAP-023",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Jaymin Raval",
+      "properties": {
+        "brandModel": "Dell"
+      }
+    },
+    {
+      "assetTag": "LAP-006",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Shubham Patidar",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "C02G232HMD6M"
+      }
+    },
+    {
+      "assetTag": "LAP-011",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Parita Shah",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "S2BHSGD",
+        "simNumber": "9653660428"
+      }
+    },
+    {
+      "assetTag": "MOB-006",
+      "type": "mobile",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Rushik Joshi",
+      "properties": {
+        "brandModel": "Redmi 14C 5G",
+        "imei1": "860894078640062"
+      },
+      "purchase": {
+        "price": 10000
+      }
+    },
+    {
+      "assetTag": "LAP-017",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Rushik Joshi",
+      "properties": {
+        "brandModel": "LeNova Ideapad Slim 3",
+        "serialNumber": "PF9XB5728334"
+      }
+    },
+    {
+      "assetTag": "LAP-009",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Jay Soni",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "FBS93F3"
+      }
+    },
+    {
+      "assetTag": "MOB-004",
+      "type": "mobile",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Jay Soni",
+      "properties": {
+        "brandModel": "Redmi A4 5G",
+        "serialNumber": "59186/X5TC03658",
+        "imei1": "865767073554063",
+        "imei2": "865767073554071",
+        "simNumber": "9082140358"
+      },
+      "purchase": {
+        "price": 8000
+      }
+    },
+    {
+      "assetTag": "LAP-022",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Anjali Mevada",
+      "properties": {
+        "brandModel": "Latitude 7480",
+        "serialNumber": "6PMS8H2"
+      }
+    },
+    {
+      "assetTag": "LAP-016",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Sanskar Jaiswal",
+      "properties": {
+        "brandModel": "Dell 5490",
+        "serialNumber": "1KKDPV2"
+      }
+    },
+    {
+      "assetTag": "LAP-027",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Bhagyesh Bhalodiya",
+      "properties": {
+        "brandModel": "Probook"
+      }
+    },
+    {
+      "assetTag": "LAP-012",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Bhagyesh Bhalodiya",
+      "properties": {
+        "brandModel": "LeNovo Ideapad 3",
+        "serialNumber": "PF3AL1N6"
+      }
+    },
+    {
+      "assetTag": "LAP-019",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Hiral Patel",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "5YQGFH2"
+      }
+    },
+    {
+      "assetTag": "LAP-020",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Prashant Gohil",
+      "properties": {
+        "brandModel": "LeNovo",
+        "serialNumber": "PG04K7AW"
+      }
+    },
+    {
+      "assetTag": "LAP-021",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Mit Prajapati",
+      "properties": {
+        "brandModel": "Dell"
+      }
+    },
+    {
+      "assetTag": "LAP-010",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Radhika Baldaniya",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "20505672110"
+      }
+    },
+    {
+      "assetTag": "LAP-025",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Divya Rojiwadiya",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "3YYWNV2"
+      }
+    },
+    {
+      "assetTag": "LAP-029",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Kartik Jagad",
+      "properties": {
+        "brandModel": "Dell Ultrabook",
+        "serialNumber": "7C565S2"
+      }
+    },
+    {
+      "assetTag": "LAP-030",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Premal Bhatt",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "47LVTT2"
+      }
+    },
+    {
+      "assetTag": "LAP-024",
+      "type": "laptop",
+      "category": "device",
+      "status": "Good",
+      "ownership": "employee",
+      "assignedTo": "Mahesh Parmar",
+      "properties": {
+        "brandModel": "Dell",
+        "serialNumber": "37763607170"
+      }
+    }
+  ],
+  "accessories": [
+    {
+      "assetTag": "MO-008",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Priyanka Patel",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "HP-001",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Priyanka Patel",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "STD-006",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Priyanka Patel",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "MO-010",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Jaydeep Sosa",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "STD-001",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Jaydeep Sosa",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "CHR-011",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Jaydeep Sosa",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-003",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Sandip Rathod",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "UNKNOWN-VIRE",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Sandip Rathod",
+      "properties": {
+        "accessoryType": "Headphone",
+        "note": "Vired EarPhone"
+      }
+    },
+    {
+      "assetTag": "MO-012",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Aarti Kushwaha",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "HP-003",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Aarti Kushwaha",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "STD-008",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Aarti Kushwaha",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "KB-001",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Aarti Kushwaha",
+      "properties": {
+        "accessoryType": "Keyboard"
+      }
+    },
+    {
+      "assetTag": "MO-006",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Vishal Mali",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "STD-002",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Vishal Mali",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "CHR-025",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Vishal Mali",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-014",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Nimesh Mishra",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "ER-004",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Nimesh Mishra",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "STD-003",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Nimesh Mishra",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "CHR-026",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Nimesh Mishra",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-005",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Anchal Kumari",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "HP-012",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Anchal Kumari",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "STD-004",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Anchal Kumari",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "CHR-023",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Ujjaval Parmar",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-007",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Dolly Sanchaniya",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "HP-005",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Dolly Sanchaniya",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "STD-014",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Smit Parmar",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "CHR-021",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Smit Parmar",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-015",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Chirag Ramani",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "HP-006",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Chirag Ramani",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "KB-002",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Chirag Ramani",
+      "properties": {
+        "accessoryType": "Keyboard"
+      }
+    },
+    {
+      "assetTag": "MONT-003",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Chirag Ramani",
+      "properties": {
+        "accessoryType": "Monitor"
+      }
+    },
+    {
+      "assetTag": "MO-001",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Jaymin Raval",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "STD-011",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Jaymin Raval",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "CHR-022",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Shubham Patidar",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-011",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Parita Shah",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "MO-019",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Rushik Joshi",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "HP-007",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Rushik Joshi",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "CHR-008",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Rushik Joshi",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "HP-008",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Jay Soni",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "STD-009",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Jay Soni",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "MO-018",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Anjali Mevada",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "STD-010",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Anjali Mevada",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "CHR-012",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Anjali Mevada",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-020",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Sanskar Jaiswal",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "STD-005",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Bhagyesh Bhalodiya",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "CHR-015",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Bhagyesh Bhalodiya",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "HP-011",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Bhagyesh Bhalodiya",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "STD-012",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Bhagyesh Bhalodiya",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "CHR-014",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Bhagyesh Bhalodiya",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-009",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Hiral Patel",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "KB-003",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Hiral Patel",
+      "properties": {
+        "accessoryType": "Keyboard"
+      }
+    },
+    {
+      "assetTag": "MONT-001",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Hiral Patel",
+      "properties": {
+        "accessoryType": "Monitor"
+      }
+    },
+    {
+      "assetTag": "CHR-024",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Hiral Patel",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-024",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Prashant Gohil",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "CHR-009",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Prashant Gohil",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-022",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Mit Prajapati",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "HP-010",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Mit Prajapati",
+      "properties": {
+        "accessoryType": "Headphone"
+      }
+    },
+    {
+      "assetTag": "STD-013",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Chaitanya Patel",
+      "properties": {
+        "accessoryType": "Stand"
+      }
+    },
+    {
+      "assetTag": "MO-027",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Sujal Prajapati",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "MO-023",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Radhika Baldaniya",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "CHR-005",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Radhika Baldaniya",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-026",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Divya Rojiwadiya",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "CHR-016",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Divya Rojiwadiya",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "KB-004",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Kartik Jagad",
+      "properties": {
+        "accessoryType": "Keyboard"
+      }
+    },
+    {
+      "assetTag": "MONT-002",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Kartik Jagad",
+      "properties": {
+        "accessoryType": "Monitor"
+      }
+    },
+    {
+      "assetTag": "CHR-18",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Kartik Jagad",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-021",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Hardik Jain",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "MO-025",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Premal Bhatt",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "CHR-013",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Premal Bhatt",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    },
+    {
+      "assetTag": "MO-002",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Mahesh Parmar",
+      "properties": {
+        "accessoryType": "Mouse"
+      }
+    },
+    {
+      "assetTag": "CHR-019",
+      "type": "accessory",
+      "ownership": "employee",
+      "assignedTo": "Mahesh Parmar",
+      "properties": {
+        "accessoryType": "Charger"
+      }
+    }
+  ],
+  "assignments": [
+    {
+      "employeeName": "Priyanka Patel",
+      "assetTag": "LAP-007",
+      "status": "active"
+    },
+    {
+      "employeeName": "Priyanka Patel",
+      "assetTag": "MO-008",
+      "status": "active"
+    },
+    {
+      "employeeName": "Priyanka Patel",
+      "assetTag": "HP-001",
+      "status": "active"
+    },
+    {
+      "employeeName": "Priyanka Patel",
+      "assetTag": "STD-006",
+      "status": "active"
+    },
+    {
+      "employeeName": "Priyanka Patel",
+      "assetTag": "MOB-001",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jaydeep Sosa",
+      "assetTag": "MO-010",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jaydeep Sosa",
+      "assetTag": "STD-001",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jaydeep Sosa",
+      "assetTag": "CHR-011",
+      "status": "active"
+    },
+    {
+      "employeeName": "Sandip Rathod",
+      "assetTag": "MO-003",
+      "status": "active"
+    },
+    {
+      "employeeName": "Sandip Rathod",
+      "assetTag": "UNKNOWN-VIRE",
+      "status": "active"
+    },
+    {
+      "employeeName": "Aarti Kushwaha",
+      "assetTag": "LAP-001",
+      "status": "active"
+    },
+    {
+      "employeeName": "Aarti Kushwaha",
+      "assetTag": "MO-012",
+      "status": "active"
+    },
+    {
+      "employeeName": "Aarti Kushwaha",
+      "assetTag": "HP-003",
+      "status": "active"
+    },
+    {
+      "employeeName": "Aarti Kushwaha",
+      "assetTag": "STD-008",
+      "status": "active"
+    },
+    {
+      "employeeName": "Aarti Kushwaha",
+      "assetTag": "KB-001",
+      "status": "active"
+    },
+    {
+      "employeeName": "Vishal Mali",
+      "assetTag": "LAP-002",
+      "status": "active"
+    },
+    {
+      "employeeName": "Vishal Mali",
+      "assetTag": "MO-006",
+      "status": "active"
+    },
+    {
+      "employeeName": "Vishal Mali",
+      "assetTag": "STD-002",
+      "status": "active"
+    },
+    {
+      "employeeName": "Vishal Mali",
+      "assetTag": "CHR-025",
+      "status": "active"
+    },
+    {
+      "employeeName": "Nimesh Mishra",
+      "assetTag": "LAP-003",
+      "status": "active"
+    },
+    {
+      "employeeName": "Nimesh Mishra",
+      "assetTag": "MO-014",
+      "status": "active"
+    },
+    {
+      "employeeName": "Nimesh Mishra",
+      "assetTag": "ER-004",
+      "status": "active"
+    },
+    {
+      "employeeName": "Nimesh Mishra",
+      "assetTag": "STD-003",
+      "status": "active"
+    },
+    {
+      "employeeName": "Nimesh Mishra",
+      "assetTag": "CHR-026",
+      "status": "active"
+    },
+    {
+      "employeeName": "Anchal Kumari",
+      "assetTag": "LAP-004",
+      "status": "active"
+    },
+    {
+      "employeeName": "Anchal Kumari",
+      "assetTag": "MO-005",
+      "status": "active"
+    },
+    {
+      "employeeName": "Anchal Kumari",
+      "assetTag": "HP-012",
+      "status": "active"
+    },
+    {
+      "employeeName": "Anchal Kumari",
+      "assetTag": "STD-004",
+      "status": "active"
+    },
+    {
+      "employeeName": "Ujjaval Parmar",
+      "assetTag": "LAP-018",
+      "status": "active"
+    },
+    {
+      "employeeName": "Ujjaval Parmar",
+      "assetTag": "CHR-023",
+      "status": "active"
+    },
+    {
+      "employeeName": "Ujjaval Parmar",
+      "assetTag": "MOB-002",
+      "status": "active"
+    },
+    {
+      "employeeName": "Dolly Sanchaniya",
+      "assetTag": "LAP-008",
+      "status": "active"
+    },
+    {
+      "employeeName": "Dolly Sanchaniya",
+      "assetTag": "MO-007",
+      "status": "active"
+    },
+    {
+      "employeeName": "Dolly Sanchaniya",
+      "assetTag": "HP-005",
+      "status": "active"
+    },
+    {
+      "employeeName": "Smit Parmar",
+      "assetTag": "LAP-026",
+      "status": "active"
+    },
+    {
+      "employeeName": "Smit Parmar",
+      "assetTag": "STD-014",
+      "status": "active"
+    },
+    {
+      "employeeName": "Smit Parmar",
+      "assetTag": "CHR-021",
+      "status": "active"
+    },
+    {
+      "employeeName": "Chirag Ramani",
+      "assetTag": "DES-001",
+      "status": "active"
+    },
+    {
+      "employeeName": "Chirag Ramani",
+      "assetTag": "MO-015",
+      "status": "active"
+    },
+    {
+      "employeeName": "Chirag Ramani",
+      "assetTag": "HP-006",
+      "status": "active"
+    },
+    {
+      "employeeName": "Chirag Ramani",
+      "assetTag": "KB-002",
+      "status": "active"
+    },
+    {
+      "employeeName": "Chirag Ramani",
+      "assetTag": "MONT-003",
+      "status": "active"
+    },
+    {
+      "employeeName": "Chirag Ramani",
+      "assetTag": "MOB-VARIOUS",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jaymin Raval",
+      "assetTag": "LAP-023",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jaymin Raval",
+      "assetTag": "MO-001",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jaymin Raval",
+      "assetTag": "STD-011",
+      "status": "active"
+    },
+    {
+      "employeeName": "Shubham Patidar",
+      "assetTag": "LAP-006",
+      "status": "active"
+    },
+    {
+      "employeeName": "Shubham Patidar",
+      "assetTag": "CHR-022",
+      "status": "active"
+    },
+    {
+      "employeeName": "Parita Shah",
+      "assetTag": "LAP-011",
+      "status": "active"
+    },
+    {
+      "employeeName": "Parita Shah",
+      "assetTag": "MO-011",
+      "status": "active"
+    },
+    {
+      "employeeName": "Rushik Joshi",
+      "assetTag": "MOB-006",
+      "status": "active"
+    },
+    {
+      "employeeName": "Rushik Joshi",
+      "assetTag": "MO-019",
+      "status": "active"
+    },
+    {
+      "employeeName": "Rushik Joshi",
+      "assetTag": "LAP-017",
+      "status": "active"
+    },
+    {
+      "employeeName": "Rushik Joshi",
+      "assetTag": "HP-007",
+      "status": "active"
+    },
+    {
+      "employeeName": "Rushik Joshi",
+      "assetTag": "CHR-008",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jay Soni",
+      "assetTag": "LAP-009",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jay Soni",
+      "assetTag": "HP-008",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jay Soni",
+      "assetTag": "STD-009",
+      "status": "active"
+    },
+    {
+      "employeeName": "Jay Soni",
+      "assetTag": "MOB-004",
+      "status": "active"
+    },
+    {
+      "employeeName": "Anjali Mevada",
+      "assetTag": "LAP-022",
+      "status": "active"
+    },
+    {
+      "employeeName": "Anjali Mevada",
+      "assetTag": "MO-018",
+      "status": "active"
+    },
+    {
+      "employeeName": "Anjali Mevada",
+      "assetTag": "HP-006",
+      "status": "active"
+    },
+    {
+      "employeeName": "Anjali Mevada",
+      "assetTag": "STD-010",
+      "status": "active"
+    },
+    {
+      "employeeName": "Anjali Mevada",
+      "assetTag": "CHR-012",
+      "status": "active"
+    },
+    {
+      "employeeName": "Sanskar Jaiswal",
+      "assetTag": "LAP-016",
+      "status": "active"
+    },
+    {
+      "employeeName": "Sanskar Jaiswal",
+      "assetTag": "MO-020",
+      "status": "active"
+    },
+    {
+      "employeeName": "Bhagyesh Bhalodiya",
+      "assetTag": "LAP-027",
+      "status": "active"
+    },
+    {
+      "employeeName": "Bhagyesh Bhalodiya",
+      "assetTag": "STD-005",
+      "status": "active"
+    },
+    {
+      "employeeName": "Bhagyesh Bhalodiya",
+      "assetTag": "CHR-015",
+      "status": "active"
+    },
+    {
+      "employeeName": "Bhagyesh Bhalodiya",
+      "assetTag": "LAP-012",
+      "status": "active"
+    },
+    {
+      "employeeName": "Bhagyesh Bhalodiya",
+      "assetTag": "HP-011",
+      "status": "active"
+    },
+    {
+      "employeeName": "Bhagyesh Bhalodiya",
+      "assetTag": "STD-012",
+      "status": "active"
+    },
+    {
+      "employeeName": "Bhagyesh Bhalodiya",
+      "assetTag": "CHR-014",
+      "status": "active"
+    },
+    {
+      "employeeName": "Hiral Patel",
+      "assetTag": "LAP-019",
+      "status": "active"
+    },
+    {
+      "employeeName": "Hiral Patel",
+      "assetTag": "MO-009",
+      "status": "active"
+    },
+    {
+      "employeeName": "Hiral Patel",
+      "assetTag": "KB-003",
+      "status": "active"
+    },
+    {
+      "employeeName": "Hiral Patel",
+      "assetTag": "MONT-001",
+      "status": "active"
+    },
+    {
+      "employeeName": "Hiral Patel",
+      "assetTag": "CHR-024",
+      "status": "active"
+    },
+    {
+      "employeeName": "Prashant Gohil",
+      "assetTag": "LAP-020",
+      "status": "active"
+    },
+    {
+      "employeeName": "Prashant Gohil",
+      "assetTag": "MO-024",
+      "status": "active"
+    },
+    {
+      "employeeName": "Prashant Gohil",
+      "assetTag": "CHR-009",
+      "status": "active"
+    },
+    {
+      "employeeName": "Mit Prajapati",
+      "assetTag": "LAP-021",
+      "status": "active"
+    },
+    {
+      "employeeName": "Mit Prajapati",
+      "assetTag": "MO-022",
+      "status": "active"
+    },
+    {
+      "employeeName": "Mit Prajapati",
+      "assetTag": "HP-010",
+      "status": "active"
+    },
+    {
+      "employeeName": "Mit Prajapati",
+      "assetTag": "STD-011",
+      "status": "active"
+    },
+    {
+      "employeeName": "Chaitanya Patel",
+      "assetTag": "STD-013",
+      "status": "active"
+    },
+    {
+      "employeeName": "Sujal Prajapati",
+      "assetTag": "MO-027",
+      "status": "active"
+    },
+    {
+      "employeeName": "Radhika Baldaniya",
+      "assetTag": "LAP-010",
+      "status": "active"
+    },
+    {
+      "employeeName": "Radhika Baldaniya",
+      "assetTag": "MO-023",
+      "status": "active"
+    },
+    {
+      "employeeName": "Radhika Baldaniya",
+      "assetTag": "CHR-005",
+      "status": "active"
+    },
+    {
+      "employeeName": "Divya Rojiwadiya",
+      "assetTag": "LAP-025",
+      "status": "active"
+    },
+    {
+      "employeeName": "Divya Rojiwadiya",
+      "assetTag": "MO-026",
+      "status": "active"
+    },
+    {
+      "employeeName": "Divya Rojiwadiya",
+      "assetTag": "CHR-016",
+      "status": "active"
+    },
+    {
+      "employeeName": "Kartik Jagad",
+      "assetTag": "LAP-029",
+      "status": "active"
+    },
+    {
+      "employeeName": "Kartik Jagad",
+      "assetTag": "KB-004",
+      "status": "active"
+    },
+    {
+      "employeeName": "Kartik Jagad",
+      "assetTag": "MONT-002",
+      "status": "active"
+    },
+    {
+      "employeeName": "Kartik Jagad",
+      "assetTag": "CHR-18",
+      "status": "active"
+    },
+    {
+      "employeeName": "Hardik Jain",
+      "assetTag": "MO-021",
+      "status": "active"
+    },
+    {
+      "employeeName": "Premal Bhatt",
+      "assetTag": "LAP-030",
+      "status": "active"
+    },
+    {
+      "employeeName": "Premal Bhatt",
+      "assetTag": "MO-025",
+      "status": "active"
+    },
+    {
+      "employeeName": "Premal Bhatt",
+      "assetTag": "CHR-013",
+      "status": "active"
+    },
+    {
+      "employeeName": "Mahesh Parmar",
+      "assetTag": "LAP-024",
+      "status": "active"
+    },
+    {
+      "employeeName": "Mahesh Parmar",
+      "assetTag": "MO-002",
+      "status": "active"
+    },
+    {
+      "employeeName": "Mahesh Parmar",
+      "assetTag": "CHR-019",
+      "status": "active"
+    }
+  ]
+}

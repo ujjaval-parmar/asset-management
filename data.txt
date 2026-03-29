@@ -1,0 +1,44 @@
+1	26-May-2025	Priyanka Patel	Binary	Laptop	LAP - 007	Dell	No	No	No	No	MO - 008	HP - 001	STD - 006	No	No			
+			Binary	Mobile 	MOB - 001	Redmi 14C	60380/X5RT00145	860894078647083	860894078647091	7383315759							₹10,000.00	
+2	17-Feb-2025	Jaydeep Sosa	Binary	No	LAP - 015	Latitude E5470	HQCFQC2	No	No	No	MO - 010	No	STD - 001	No	No	CHR - 011		Done
+3	17-Feb-2025	Sandip Rathod	Binary	No	No	No	No	No	No	No	MO - 003	Vired EarPhone	No	No	No			
+4	05-Mar-2025	Aarti Kushwaha	Binary	Laptop	LAP - 001	Dell	0272098-001045	No	No	No	MO - 012	HP - 003	STD - 008	KB - 001	No			Done
+5	12-Dec-2024	Vishal Mali	Binary	Laptop	LAP - 002	Dell	9GSGWD2	No	No	No	MO - 006	No	STD - 002	No	No	CHR - 025		Done
+6	12-Dec-2024	Nimesh Mishra	Binary	Laptop	LAP - 003	MacOS	C02PD3H6G3QC	No	No	9653660446	MO - 014	ER - 004 (OLD)	STD - 003	No	No	CHR - 026		
+7	5th dec 2024	Anchal Kumari	Binary	Laptop	LAP - 004	Dell	HFF85M2	No	No	No	MO - 005	HP - 012	STD - 004	No	No			
+8	19-Nov-2024	Ujjaval Parmar	Binary	Laptop	LAP - 018	Mac Apple	CO2D3CVQMD6M	No	No	No	No	No	No	No	No	CHR - 023		Bag
+	NA	Office Mobile 	Binary	Mobile 	MOB - 003	Redmi 8A	12.5.2.0(QCPINXM)	869956044332271	869956044332289	9324933964	No	No	No	No	No		₹8,500.00	
+	19-Nov-2024	Ujjaval Parmar	Binary	Mobile 	MOB - 002	Redmi A4 5G	60363/X4YU08529	863298075332227	863298075332235	9653660428	No	No	No	No	No		₹8,000.00	
+9	24-Feb-2025	Dolly Sanchaniya	Binary	Laptop	LAP - 008	Dell Latitude 7480	7ZG6PL2	No	No	No	MO - 007	HP - 005	No	No	No			
+10	11-Nov-2024	Rahul Thakor	No	No	No	No	No	No	No	No	No	No	No	No	No			
+11	24-Feb-2025	Smit Parmar	Binary	Laptop 	LAP - 026	Mac	C02X25HTJHC9	No	No	No	  No	No	STD - 014	No	No	CHR - 021		Done
+12	30-Jan-2025	Chirag Ramani	Binary	Desktop	DES - 001	No	No	No	No	No	MO - 015	HP - 006	No	KB - 002	MONT - 003	NO	NO	Done
+			Binary	Mobile	MOB - 002, 003, 007, 008, 009													
+13	24-Feb-2025	Priyal Ghetiya	Binary	Laptop 	No	Latitude 5480	GL7S8H2	No	No	No	No	No	No	No	No			Done
+14	12-Jun-2025	Jaymin Raval	Binary	Laptop 	LAP - 023	Dell	No	No	No	No	MO - 001	No	STD - 011	No	No			
+15	07-Jul-2025	Shubham Patidar	Binary	Laptop	LAP - 006	Dell	C02G232HMD6M	No	No	No	No	No	No	No	No	CHR - 022	No	Done
+			Binary	Mobile	No	One Plus Node Ce2	SSHYINU875ZTCADA	860218061726417	860218061726409	No	No	No	No	No	No		₹18,999.00	
+16	10-Jul-2025	Parita Shah	Binary	Laptop	LAP - 011	Dell	S2BHSGD	No	No	9653660428	MO - 011	No	No	No	No			
+17	21-Jul-2025	Rushik Joshi	Binary	Mobile 	MOB - 006	Redmi 14C 5G	No	860894078640062	No	No	MO - 019	No	No	No	No		₹10,000.00	
+			Binary	Laptop	LAP - 017	LeNova Ideapad Slim 3	PF9XB5728334	No	No	No		HP - 007	No	No	No	CHR - 008		
+19	18-Aug-2025	Jay Soni	Binary	Laptop	LAP - 009	Dell 	FBS93F3	No	No	No	No	HP - 008	STD - 009	No	No			
+20			Binary	Mobile	MOB - 004	Redmi A4 5G	59186/X5TC03658	865767073554063	865767073554071	9082140358	No	No	No	No	No		₹8,000.00	
+21	15-Sep-2025	Anjali Mevada	Binary	Laptop	LAP - 022	Latitude 7480 	6PMS8H2	No	No	No	MO - 018	HP - 006	STD - 010	No	No	CHR - 012		Done
+22	25-Sep-2025	Sanskar Jaiswal	Binary	Laptop	LAP - 016	Dell 5490	1KKDPV2	No	No	No	MO - 020	No	No	No	No	No		
+23	27-Oct-2025	Bhagyesh Bhalodiya	Binary	Laptop	LAP - 027	Probook	NA	No	No	No	No	No	STD - 005	No	No	CHR - 015	No	Done
+			Binary	Laptop	LAP - 012	LeNovo Ideapad 3	PF3AL1N6	No	No	No	No	HP - 011	STD - 012	No	No	CHR - 014	No	Done
+24	27-Oct-2025	Hiral Patel	Binary	Laptop	LAP - 019	Dell   	5YQGFH2	No	No	No	MO - 009		No	KB - 003	MONT - 001	CHR - 024		Done
+25	27-Oct-2025	Prashant Gohil	Binary	Laptop	LAP - 020	LeNovo   	PG04K7AW	No	No	No	MO - 024		No	No	No	CHR - 009		Done
+26	10-Nov-2025	Mit Prajapati	Binary	Laptop	LAP - 021	Dell	No	No	No	No	MO - 022	HP - 010	STD - 011	No	No	No		Done
+28	24-Nov-2025	Chaitanya Patel	Binary	No	No	No	No	No	No	No	No	No	STD - 013	No	No	No		Done
+29	15-Dec-2025	Upasana Bhure	Binary	No	No	No	No	No	No	No	No	No	No	No	No	No		
+30	23-Dec-2025	Sujal Prajapati	Binary	No	No	No	No	No	No	No	MO - 027	No	No	No	No	No		
+31	05-Jan-2026	Radhika Baldaniya	Binary	Laptop	LAP - 010	Dell	20505672110	No	No	No	MO - 023	No	No	No	No	CHR - 005		
+32	05-Jan-2026	Divya Rojiwadiya	Binary	Laptop	LAP - 025	Dell	3YYWNV2	No	No	No	MO - 026	No	No	No	No	CHR - 016		Done
+33	08-Jan-2026	Kartik Jagad	Binary	Laptop	LAP - 029	Dell Ultrabook	7C565S2	No	No	No	No	No	No	KB - 004	MONT - 002	CHR - 18		Done
+34	19-Jan-2026	Hardik Jain	Binary	No	No	No	No	No	No	No	MO - 021	No	No	No	No	No		Done
+35	19-Jan-2026	Himanshu Patanvadiya	Binary	No	No	No	No	No	No	No	No	No	No	No	No	No		Done
+37	19-Jan-2026	Nilesh Kanzariya	Binary	No	No	No	No	No	No	No	No	No	No	No	No	No		Done
+38	20-Jan-2026	Vrutik Vasoya	Binary	No	No	No	No	No	No	No	No	No	No	No	No	No		
+39	22-Jan-2026	Premal Bhatt	Binary	Laptop	LAP - 030	Dell	47LVTT2	No	No	No	MO - 025	No	No	No	No	CHR - 013		
+40	12-Feb-2026	Mahesh Parmar	Binary	Laptop	LAP - 024	Dell	37763607170	No	No	No	MO - 002	No	No	No	No	CHR - 019		Done
