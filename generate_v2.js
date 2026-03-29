@@ -39,7 +39,7 @@ const accessoryColMap = [
 
 const employees = [];
 const assets = [];
-const assignments = [];
+const assignments = []; // Track assignments for sync
 
 let lastEmployee = null;
 let lastJoiningDate = null;
@@ -97,6 +97,14 @@ raw.forEach((line, lineIndex) => {
   let tagsToProcess = [assetTag];
   if (assetTag && assetTag.includes('MOB-002,003,007,008,009')) {
     tagsToProcess = ['MOB-007', 'MOB-008', 'MOB-009']; 
+  } else if (!assetTag && hwTypeRaw && hwTypeRaw.toLowerCase() !== 'no') {
+      // Generate a TBD tag for devices that have a type but no tag
+      let cleanType = hwTypeRaw.toLowerCase().replace(/\s/g, '');
+      let prefix = cleanType.startsWith('lap') ? 'LAP' : 
+                   cleanType.startsWith('mob') ? 'MOB' : 
+                   cleanType.startsWith('des') ? 'DES' : 'TBD';
+      let identifier = serialNo ? serialNo.replace(/[^A-Z0-9]/gi, '').substring(0, 8).toUpperCase() : (lineIndex + 1);
+      tagsToProcess = [`TBD-${prefix}-${identifier}`];
   }
 
   tagsToProcess.forEach(tag => {
@@ -106,6 +114,7 @@ raw.forEach((line, lineIndex) => {
     else if (type.includes('mobile')) type = 'mobile';
     else if (type.includes('desktop')) type = 'desktop';
 
+    const assetId = 'REF_ASSET_' + tag;
     const asset = {
       assetTag: tag,
       type: type,
@@ -113,7 +122,7 @@ raw.forEach((line, lineIndex) => {
       status: "Good",
       ownership: ownership,
       isAvailable: assignedToRaw ? false : true,
-      assignedTo: assignedToRaw ? { employeeId: 'REF_EMPLOYEE_' + assignedToRaw, employeeName: assignedToRaw } : null,
+      assignedTo: assignedToRaw ? { employeeId: null, employeeName: assignedToRaw } : null,
       currentAssignmentId: assignedToRaw ? 'REF_ASSIGNMENT_' + tag : null,
       purchase: {},
       properties: {},
@@ -131,24 +140,17 @@ raw.forEach((line, lineIndex) => {
     if (imei2) asset.properties.imei2 = imei2;
     if (sim) asset.properties.simNumber = sim;
 
-    if (!assets.find(a => a.assetTag === tag)) assets.push(asset);
-
-    if (assignedToRaw) {
-      assignments.push({
-        assetTag: tag, // For lookup later
-        assetId: 'REF_ASSET_' + tag,
-        employeeId: 'REF_EMPLOYEE_' + assignedToRaw,
-        employeeName: assignedToRaw,
-        assignedAt: 'RAW_NEW_DATE',
-        returnedAt: null,
-        status: 'active',
-        conditionOut: 'Good',
-        conditionIn: null,
-        notes: 'Initial assignment'
-      });
-      // also push to employee's currentAssets lookup
-      let emp = employees.find(e => e.name === assignedToRaw);
-      if (emp) emp.currentAssets.push('REF_ASSET_' + tag);
+    if (!assets.find(a => a.assetTag === tag)) {
+        assets.push(asset);
+        if (assignedToRaw) {
+            assignments.push({
+                assetTag: tag,
+                employeeName: assignedToRaw,
+                status: 'active',
+                assignedDate: joiningDate ? formatDate(joiningDate) : 'RAW_NEW_DATE',
+                notes: 'Imported from Excel'
+            });
+        }
     }
   });
 
@@ -164,70 +166,30 @@ raw.forEach((line, lineIndex) => {
     const accessory = {
         assetTag: accTag,
         type: acc.type,
-        category: 'accessory',
+        category: acc.type === 'keyboard' || acc.type === 'monitor' ? 'device' : 'accessory',
         status: "Good",
         ownership: ownership,
         isAvailable: assignedToRaw ? false : true,
-        assignedTo: assignedToRaw ? { employeeId: 'REF_EMPLOYEE_' + assignedToRaw, employeeName: assignedToRaw } : null,
+        assignedTo: assignedToRaw ? { employeeId: null, employeeName: assignedToRaw } : null,
         currentAssignmentId: assignedToRaw ? 'REF_ASSIGNMENT_' + accTag : null,
         properties: { accessoryType: acc.type },
         createdAt: 'RAW_NEW_DATE',
         updatedAt: 'RAW_NEW_DATE'
     };
 
-    if (!assets.find(a => a.assetTag === accTag)) assets.push(accessory);
-
-    if (assignedToRaw) {
-      assignments.push({
-        assetTag: accTag,
-        assetId: 'REF_ASSET_' + accTag,
-        employeeId: 'REF_EMPLOYEE_' + assignedToRaw,
-        employeeName: assignedToRaw,
-        assignedAt: 'RAW_NEW_DATE',
-        returnedAt: null,
-        status: 'active',
-        conditionOut: 'Good',
-        conditionIn: null,
-        notes: 'Initial assignment'
-      });
-      let emp = employees.find(e => e.name === assignedToRaw);
-      if (emp) emp.currentAssets.push('REF_ASSET_' + accTag);
+    if (!assets.find(a => a.assetTag === accTag)) {
+        assets.push(accessory);
+        if (assignedToRaw) {
+            assignments.push({
+                assetTag: accTag,
+                employeeName: assignedToRaw,
+                status: 'active',
+                assignedDate: joiningDate ? formatDate(joiningDate) : 'RAW_NEW_DATE',
+                notes: 'Imported from Excel'
+            });
+        }
     }
   });
-  
-  let bagRaw = clean(cols[18]);
-  if (bagRaw && bagRaw.toLowerCase() === 'bag') {
-      let bagTag = 'BAG-' + String(lineIndex).padStart(3, '0');
-      assets.push({
-          assetTag: bagTag,
-          type: 'bag',
-          category: 'accessory',
-          status: "Good",
-          ownership: ownership,
-          isAvailable: assignedToRaw ? false : true,
-          assignedTo: assignedToRaw ? { employeeId: 'REF_EMPLOYEE_' + assignedToRaw, employeeName: assignedToRaw } : null,
-          currentAssignmentId: assignedToRaw ? 'REF_ASSIGNMENT_' + bagTag : null,
-          properties: { accessoryType: 'Bag' },
-          createdAt: 'RAW_NEW_DATE',
-          updatedAt: 'RAW_NEW_DATE'
-      });
-      if (assignedToRaw) {
-          assignments.push({
-            assetTag: bagTag,
-            assetId: 'REF_ASSET_' + bagTag,
-            employeeId: 'REF_EMPLOYEE_' + assignedToRaw,
-            employeeName: assignedToRaw,
-            assignedAt: 'RAW_NEW_DATE',
-            returnedAt: null,
-            status: 'active',
-            conditionOut: 'Good',
-            conditionIn: null,
-            notes: 'Initial assignment'
-          });
-          let emp = employees.find(e => e.name === assignedToRaw);
-          if (emp) emp.currentAssets.push('REF_ASSET_' + bagTag);
-      }
-  }
 });
 
 let employeesJson = JSON.stringify(employees, null, 2);
@@ -239,101 +201,142 @@ employeesJson = employeesJson.replace(/"RAW_NEW_DATE_([^"]+)"/g, "new Date('$1')
 assetsJson = assetsJson.replace(/"RAW_NEW_DATE_([^"]+)"/g, "new Date('$1')").replace(/"RAW_NEW_DATE"/g, "new Date()");
 assignmentsJson = assignmentsJson.replace(/"RAW_NEW_DATE_([^"]+)"/g, "new Date('$1')").replace(/"RAW_NEW_DATE"/g, "new Date()");
 
-// Ref Replacements
-// We map these to actual variables in the TSX file
-employeesJson = employeesJson.replace(/"REF_ASSET_([^"]+)"/g, "assetRefs['$1'].id");
-assetsJson = assetsJson.replace(/"REF_EMPLOYEE_([^"]+)"/g, "empRefs['$1'].id");
-assetsJson = assetsJson.replace(/"REF_ASSIGNMENT_([^"]+)"/g, "assignmentRefs['$1'].id");
-assignmentsJson = assignmentsJson.replace(/"REF_ASSET_([^"]+)"/g, "assetRefs['$1'].id");
-assignmentsJson = assignmentsJson.replace(/"REF_EMPLOYEE_([^"]+)"/g, "empRefs['$1'].id");
+let syncTsxContent = `import firestore from '@react-native-firebase/firestore';
 
+const EMPLOYEES_DATA = ${employeesJson};
+const ASSETS_DATA_RAW = ${assetsJson};
+const ASSIGNMENTS_DATA_RAW = ${assignmentsJson};
 
-let tsxContent = `import firestore from '@react-native-firebase/firestore';
-
-export const runSeeder = async () => {
-  console.log('🚀 Seeding started with Batch Inserts...');
-
+export const runSync = async () => {
+  console.log('🔄 Synchronization started...');
   try {
     const db = firestore();
-    
-    // 1. Create Document References mapping
-    const empRefs: { [name: string]: any } = {
-`;
-employees.forEach(emp => tsxContent += `      "${emp.name}": db.collection('employees').doc(),\n`);
-tsxContent += `    };
-    const assetRefs: { [tag: string]: any } = {
-`;
-assets.forEach(ass => tsxContent += `      "${ass.assetTag}": db.collection('assets').doc(),\n`);
-tsxContent += `    };
-    const assignmentRefs: { [tag: string]: any } = {
-`;
-assignments.forEach(asg => tsxContent += `      "${asg.assetTag}": db.collection('assignments').doc(),\n`);
-tsxContent += `    };
-
-    const EMPLOYEES_DATA = ${employeesJson};
-    const ASSETS_DATA_RAW = ${assetsJson};
-    const ASSIGNMENTS_DATA_RAW = ${assignmentsJson};
-
-    // 2. We initialize our batch chunks (Firestore limits to 500 ops per batch)
-    // Here we have around ~150 rows so 1 batch is usually fine, but let's chunk to be extremely safe.
-    let batches = [db.batch()];
+    let batch = db.batch();
     let opCount = 0;
 
-    const commitBatch = () => {
-      if (opCount === 490) {
-        batches.push(db.batch());
-        opCount = 0;
-      }
-      opCount++;
-      return batches[batches.length - 1];
+    const commitAndReset = async () => {
+      await batch.commit();
+      batch = db.batch();
+      opCount = 0;
     };
 
-    // 3. Queue Asset Types Operations
+    const commitIfFull = async () => {
+      if (opCount >= 450) {
+        await commitAndReset();
+      }
+    };
+
+    // 1. Sync Asset Types
     const assetTypes = [
-      { id: 'laptop', name: 'Laptop', category: 'device', fields: [{ key: 'brandModel', type: 'text', required: true }, { key: 'serialNumber', type: 'text', required: true }] },
-      { id: 'mobile', name: 'Mobile', category: 'device', fields: [{ key: 'brandModel', type: 'text', required: true }, { key: 'imei1', type: 'text', required: true }, { key: 'imei2', type: 'text', required: false }, { key: 'simNumber', type: 'text', required: false }] },
-      { id: 'desktop', name: 'Desktop', category: 'device', fields: [{ key: 'brandModel', type: 'text', required: false }] },
-      { id: 'monitor', name: 'Monitor', category: 'device', fields: [{ key: 'brandModel', type: 'text', required: false }] },
-      { id: 'accessory', name: 'Accessory', category: 'accessory', fields: [{ key: 'accessoryType', type: 'text', required: true }] }
+      { id: 'laptop', name: 'Laptop', category: 'device' },
+      { id: 'mobile', name: 'Mobile', category: 'device' },
+      { id: 'desktop', name: 'Desktop', category: 'device' },
+      { id: 'monitor', name: 'Monitor', category: 'device' },
+      { id: 'keyboard', name: 'Keyboard', category: 'device' },
+      { id: 'charger', name: 'Charger', category: 'accessory' },
+      { id: 'mouse', name: 'Mouse', category: 'accessory' },
+      { id: 'headphone', name: 'Headphone', category: 'accessory' },
+      { id: 'stand', name: 'Stand', category: 'accessory' },
+      { id: 'accessory', name: 'Accessory', category: 'accessory' }
     ];
 
-    assetTypes.forEach((item) => {
-      commitBatch().set(db.collection('assetTypes').doc(item.id), {
-        name: item.name,
-        category: item.category,
-        fields: item.fields
-      });
+    for (const type of assetTypes) {
+      batch.set(db.collection('assetTypes').doc(type.id), type, { merge: true });
+      opCount++;
+    }
+    await commitIfFull();
+
+    // 2. Fetch existing maps
+    const existingEmps = await db.collection('employees').get();
+    const empMap: { [name: string]: string } = {};
+    existingEmps.forEach(doc => empMap[doc.data().name] = doc.id);
+
+    const existingAssets = await db.collection('assets').get();
+    const assetMap: { [tag: string]: string } = {};
+    existingAssets.forEach(doc => {
+      if (doc.data().assetTag) assetMap[doc.data().assetTag] = doc.id;
     });
 
-    // 4. Queue Employees Operations
-    EMPLOYEES_DATA.forEach((emp: any) => {
-      commitBatch().set(empRefs[emp.name], emp);
-    });
+    const activeAsgSnapshot = await db.collection('assignments').where('status', '==', 'active').get();
+    const activeAsgMap: { [assetId: string]: string } = {};
+    activeAsgSnapshot.forEach(doc => activeAsgMap[doc.data().assetId] = doc.id);
 
-    // 5. Queue Assets Operations
-    ASSETS_DATA_RAW.forEach((ass: any) => {
-      commitBatch().set(assetRefs[ass.assetTag], ass);
-    });
-
-    // 6. Queue Assignments Operations
-    ASSIGNMENTS_DATA_RAW.forEach((asg: any) => {
-      // Remove the dummy assetTag which we embedded just for reference mapping
-      const { assetTag, ...actualAssignmentData } = asg; 
-      commitBatch().set(assignmentRefs[assetTag], actualAssignmentData);
-    });
-
-    // 7. Commit all batches
-    for (const batch of batches) {
-      await batch.commit();
+    // 3. Sync Employees
+    console.log('Syncing employees...');
+    for (const emp of EMPLOYEES_DATA) {
+      let ref;
+      if (empMap[emp.name]) {
+        ref = db.collection('employees').doc(empMap[emp.name]);
+      } else {
+        ref = db.collection('employees').doc();
+        empMap[emp.name] = ref.id;
+      }
+      batch.set(ref, emp, { merge: true });
+      opCount++;
+      await commitIfFull();
     }
 
-    console.log('✅✅ All structured data elegantly committed via Batch Writes safely! ✅✅');
-    
+    // 4. Sync Assets & Assignments
+    console.log('Syncing assets and assignments...');
+    const asgRefs: { [tag: string]: string } = {};
+
+    // 4a. Prepare Assignments first to get IDs
+    for (const asg of ASSIGNMENTS_DATA_RAW) {
+        const empId = empMap[asg.employeeName];
+        const assetId = assetMap[asg.assetTag];
+
+        if (empId && assetId) {
+            // Check if active assignment exists for this asset
+            if (!activeAsgMap[assetId]) {
+                const asgRef = db.collection('assignments').doc();
+                batch.set(asgRef, {
+                    assetId,
+                    employeeId: empId,
+                    employeeName: asg.employeeName,
+                    assignedDate: asg.assignedDate,
+                    status: 'active',
+                    conditionOut: 'Good',
+                    notes: asg.notes
+                });
+                asgRefs[asg.assetTag] = asgRef.id;
+                opCount++;
+                await commitIfFull();
+            } else {
+                asgRefs[asg.assetTag] = activeAsgMap[assetId];
+            }
+        }
+    }
+
+    // 4b. Sync Assets with ref IDs
+    for (const ass of ASSETS_DATA_RAW) {
+      let ref;
+      if (assetMap[ass.assetTag]) {
+        ref = db.collection('assets').doc(assetMap[ass.assetTag]);
+      } else {
+        ref = db.collection('assets').doc();
+        assetMap[ass.assetTag] = ref.id;
+      }
+
+      // Resolve references
+      if (ass.assignedTo && ass.assignedTo.employeeName) {
+        (ass.assignedTo as any).employeeId = empMap[ass.assignedTo.employeeName] || null;
+      }
+      (ass as any).currentAssignmentId = (asgRefs as any)[ass.assetTag] || null;
+
+      batch.set(ref, ass, { merge: true });
+      opCount++;
+      await commitIfFull();
+    }
+
+    if (opCount > 0) await batch.commit();
+    console.log('✅✅ Synchronization complete! ✅✅');
+    return { success: true, count: ASSETS_DATA_RAW.length };
   } catch (error) {
-    console.error('❌ Seeder failed to run:', error);
+    console.error('❌ Sync failed:', error);
+    throw error;
   }
 };
 `;
 
-fs.writeFileSync('src/helper/AddDataToFirebase.tsx', tsxContent);
-console.log('Done mapping cleanly to refs!');
+fs.writeFileSync('src/helper/SyncDataToFirebase.tsx', syncTsxContent);
+console.log('Done generating SyncDataToFirebase.tsx!');

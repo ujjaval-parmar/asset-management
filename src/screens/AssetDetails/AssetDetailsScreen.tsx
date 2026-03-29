@@ -423,6 +423,12 @@ export const AssetDetailsScreen = ({ navigation, route }: any) => {
             <Text style={styles.propertyLabel}>Ownership</Text>
             <Text style={styles.propertyValue}>{(asset.ownership || 'Company').toUpperCase()}</Text>
           </View>
+          {asset.purchase?.price && (
+            <View style={[styles.propertyRow, { borderBottomWidth: 0 }]}>
+              <Text style={styles.propertyLabel}>Approx Value</Text>
+              <Text style={[styles.propertyValue, { color: colors.primary, fontWeight: 'bold' }]}>₹ {asset.purchase.price.toLocaleString()}</Text>
+            </View>
+          )}
         </Card>
 
         {/* Assignment History */}

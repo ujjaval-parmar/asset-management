@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, SafeAreaView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { Card } from '../../components/Card/Card';
 import { Button } from '../../components/Button/Button';
 import { ListItem } from '../../components/ListItem/ListItem';
 import { colors, spacing } from '../../constants/theme';
+import { runSync } from '../../helper/SyncDataToFirebase';
 import { styles } from './styles';
 
 export const DashboardScreen = ({ navigation }: any) => {
@@ -171,6 +172,23 @@ export const DashboardScreen = ({ navigation }: any) => {
             title="Add Asset" 
             variant="secondary"
             onPress={() => navigation.navigate('AddEditAsset')}
+            style={styles.actionButton}
+          />
+          <Button 
+            title="Sync Data" 
+            variant="outline"
+            onPress={async () => {
+              try {
+                setLoading(true);
+                await runSync();
+                Alert.alert('Sync Complete!');
+              } catch (e) {
+                Alert.alert('Sync Failed');
+                console.error(e);
+              } finally {
+                setLoading(false);
+              }
+            }}
             style={styles.actionButton}
           />
         </View>

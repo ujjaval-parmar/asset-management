@@ -24,13 +24,14 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
   const [imei2, setImei2] = useState('');
   const [simNumber, setSimNumber] = useState('');
   const [available, setAvailable] = useState(true);
+  const [price, setPrice] = useState('');
   
   const [errors, setErrors] = useState<{model?: string}>({});
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(isEditing);
   const [initialValues, setInitialValues] = useState<any>(null);
 
-  const ASSET_TYPES = ['Laptop', 'Mobile', 'Hardware', 'Accessory'];
+  const ASSET_TYPES = ['Laptop', 'Mobile', 'Keyboard', 'Mouse', 'Headphone', 'Stand', 'Monitor', 'Charger', 'Hardware', 'Accessory'];
   const OWNERSHIP_TYPES = ['Employee', 'Office'];
 
   useEffect(() => {
@@ -101,7 +102,9 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
               imei1: fetchedImei1,
               imei2: fetchedImei2,
               simNumber: fetchedSim,
+              price: data?.purchase?.price?.toString() || '',
             });
+            setPrice(data?.purchase?.price?.toString() || '');
           }
           setFetching(false);
         })
@@ -168,6 +171,10 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
           ownership: cleanOwnership,
           status,
           properties: computedProperties,
+          purchase: {
+            ...initialValues?.purchase,
+            price: price ? Number(price) : null
+          },
           updatedAt: firestore.FieldValue.serverTimestamp(),
         });
       } else {
@@ -178,6 +185,9 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
           status,
           isAvailable: true,
           properties: computedProperties,
+          purchase: {
+            price: price ? Number(price) : null
+          },
           createdAt: firestore.FieldValue.serverTimestamp(),
           updatedAt: firestore.FieldValue.serverTimestamp(),
         });
@@ -259,7 +269,8 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
     serialNumber !== initialValues.serialNumber ||
     imei1 !== initialValues.imei1 ||
     imei2 !== initialValues.imei2 ||
-    simNumber !== initialValues.simNumber
+    simNumber !== initialValues.simNumber ||
+    price !== initialValues.price
   ) : false;
 
   return (
@@ -314,6 +325,14 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
                 placeholder="Leaves Blank if not deployed"
                 value={assetTag}
                 onChangeText={setAssetTag}
+              />
+
+              <Input
+                label="Approx Price (₹)"
+                placeholder="e.g. 15000"
+                value={price}
+                onChangeText={setPrice}
+                keyboardType="numeric"
               />
 
               {/* Conditional Inputs */}

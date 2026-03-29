@@ -81,6 +81,12 @@ export const AssetsScreen = ({ navigation, route }: any) => {
     else if (cleanFilter === 'lost') filterMatch = (asset.status || '').toLowerCase() === 'lost';
     else if (cleanFilter === 'laptop') filterMatch = (asset.type || '').toLowerCase() === 'laptop' || (asset.category || '').toLowerCase() === 'laptop';
     else if (cleanFilter === 'mobile') filterMatch = (asset.type || '').toLowerCase() === 'mobile' || (asset.category || '').toLowerCase() === 'mobile';
+    else if (cleanFilter === 'keyboard') filterMatch = (asset.type || '').toLowerCase() === 'keyboard';
+    else if (cleanFilter === 'mouse') filterMatch = (asset.type || '').toLowerCase() === 'mouse';
+    else if (cleanFilter === 'headphone') filterMatch = (asset.type || '').toLowerCase() === 'headphone';
+    else if (cleanFilter === 'stand') filterMatch = (asset.type || '').toLowerCase() === 'stand';
+    else if (cleanFilter === 'monitor') filterMatch = (asset.type || '').toLowerCase() === 'monitor';
+    else if (cleanFilter === 'charger') filterMatch = (asset.type || '').toLowerCase() === 'charger';
     else if (cleanFilter === 'accessory') {
       const type = (asset.type || '').toLowerCase();
       const category = (asset.category || '').toLowerCase();
@@ -98,6 +104,12 @@ export const AssetsScreen = ({ navigation, route }: any) => {
     lost: assets.filter(a => (a.status || '').toLowerCase() === 'lost').length,
     laptop: assets.filter(a => (a.type || '').toLowerCase() === 'laptop' || (a.category || '').toLowerCase() === 'laptop').length,
     mobile: assets.filter(a => (a.type || '').toLowerCase() === 'mobile' || (a.category || '').toLowerCase() === 'mobile').length,
+    keyboard: assets.filter(a => (a.type || '').toLowerCase() === 'keyboard').length,
+    mouse: assets.filter(a => (a.type || '').toLowerCase() === 'mouse').length,
+    headphone: assets.filter(a => (a.type || '').toLowerCase() === 'headphone').length,
+    stand: assets.filter(a => (a.type || '').toLowerCase() === 'stand').length,
+    monitor: assets.filter(a => (a.type || '').toLowerCase() === 'monitor').length,
+    charger: assets.filter(a => (a.type || '').toLowerCase() === 'charger').length,
     accessory: assets.filter(a => {
       const type = (a.type || '').toLowerCase();
       const category = (a.category || '').toLowerCase();
@@ -187,7 +199,12 @@ export const AssetsScreen = ({ navigation, route }: any) => {
             { label: 'Lost', count: counts.lost },
             { label: 'Laptop', count: counts.laptop },
             { label: 'Mobile', count: counts.mobile },
-            { label: 'Accessory', count: counts.accessory },
+            { label: 'Keyboard', count: counts.keyboard },
+            { label: 'Mouse', count: counts.mouse },
+            { label: 'Headphone', count: counts.headphone },
+            { label: 'Stand', count: counts.stand },
+            { label: 'Monitor', count: counts.monitor },
+            { label: 'Charger', count: counts.charger },
           ].map((item) => (
             <TouchableOpacity 
               key={item.label}
