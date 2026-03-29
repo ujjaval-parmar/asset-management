@@ -38,18 +38,23 @@ export const EmployeesScreen = ({ navigation }: any) => {
     (emp.name || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const renderItem = ({ item }: { item: any }) => (
-    <ListItem
-      title={item.name || 'Unknown'}
-      subtitle={`Joined: ${item.joiningDate?.toDate ? item.joiningDate.toDate().toLocaleDateString() : (item.joiningDate || 'N/A')} • Status: ${item.status || 'Active'}`}
-      rightElement={
-        <View style={[styles.statusBadge, item.status === 'Active' ? styles.statusActive : styles.statusInactive]}>
-          <Text style={styles.statusText}>{item.status || 'Active'}</Text>
-        </View>
-      }
-      onPress={() => navigation.navigate('EmployeeDetails', { employeeId: item.id })}
-    />
-  );
+  const renderItem = ({ item }: { item: any }) => {
+    const joined = item.joiningDate?.toDate ? item.joiningDate.toDate().toLocaleDateString() : (item.joiningDate || 'N/A');
+    const designation = item.designation || 'No Designation';
+
+    return (
+      <ListItem
+        title={item.name || 'Unknown'}
+        subtitle={`Role: ${designation}\nJoined: ${joined}`}
+        rightElement={
+          <View style={[styles.statusBadge, item.status === 'Active' ? styles.statusActive : styles.statusInactive]}>
+            <Text style={styles.statusText}>{item.status || 'Active'}</Text>
+          </View>
+        }
+        onPress={() => navigation.navigate('EmployeeDetails', { employeeId: item.id })}
+      />
+    );
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>

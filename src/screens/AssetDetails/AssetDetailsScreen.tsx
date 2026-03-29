@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import { Card } from '../../components/Card/Card';
 import { Button } from '../../components/Button/Button';
 import { ListItem } from '../../components/ListItem/ListItem';
-import { colors } from '../../constants/theme';
+import { colors, spacing } from '../../constants/theme';
 import { styles } from './styles';
 
 export const AssetDetailsScreen = ({ navigation, route }: any) => {
@@ -50,8 +50,8 @@ export const AssetDetailsScreen = ({ navigation, route }: any) => {
             return {
               id: assignDoc.id,
               employeeName: empName,
-              assignedDate: assignmentData.assignedDate,
-              returnedDate: assignmentData.returnedDate,
+              assignedDate: assignmentData.assignedDate || assignmentData.assignedAt,
+              returnedDate: assignmentData.returnedDate || assignmentData.returnedAt,
               status: assignmentData.status,
             };
           });
@@ -93,6 +93,9 @@ export const AssetDetailsScreen = ({ navigation, route }: any) => {
     if (!dateValue) return 'N/A';
     if (typeof dateValue.toDate === 'function') {
       return dateValue.toDate().toLocaleDateString();
+    }
+    if (dateValue._seconds) {
+      return new Date(dateValue._seconds * 1000).toLocaleDateString();
     }
     return String(dateValue);
   };
@@ -198,12 +201,22 @@ export const AssetDetailsScreen = ({ navigation, route }: any) => {
             <Text style={{ color: colors.textLight, marginTop: 8 }}>No assignment history found.</Text>
           ) : (
             history.map((record) => (
-              <ListItem
-                key={record.id}
-                title={`Assigned to ${record.employeeName}`}
-                subtitle={`From: ${formatDate(record.assignedDate)} ${record.returnedDate ? `• To: ${formatDate(record.returnedDate)}` : '• Active'}`}
-                style={styles.historyItem}
-              />
+              <Card key={record.id} style={{ marginBottom: spacing.m, borderLeftWidth: 4, borderLeftColor: record.returnedDate ? colors.textLight : colors.success }}>
+                <Text style={{fontSize: 16, fontWeight: 'bold', color: colors.text}}>{record.employeeName}</Text>
+                <Text style={{color: colors.success, marginTop: 6, fontSize: 13, fontWeight: '500'}}>
+                  Deployed: {formatDate(record.assignedDate)}
+                </Text>
+                {record.returnedDate && (
+                  <Text style={{color: colors.textLight, marginTop: 2, fontSize: 13, fontWeight: '500'}}>
+                    Returned: {formatDate(record.returnedDate)}
+                  </Text>
+                )}
+                {!record.returnedDate && (
+                  <Text style={{color: colors.primary, marginTop: 2, fontSize: 13, fontWeight: 'bold'}}>
+                    Currently Active
+                  </Text>
+                )}
+              </Card>
             ))
           )}
         </View>

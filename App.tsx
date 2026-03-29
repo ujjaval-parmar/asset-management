@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { MenuProvider } from 'react-native-popup-menu';
 import { RootNavigator } from './src/navigation/RootNavigator';
 
 function App() {
@@ -9,10 +10,12 @@ function App() {
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NavigationContainer>
-        <RootNavigator />
-      </NavigationContainer>
+      <MenuProvider>
+        <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </MenuProvider>
     </SafeAreaProvider>
   );
 }

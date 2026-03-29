@@ -20,7 +20,7 @@ export const ListItem: React.FC<ListItemProps> = ({ title, subtitle, rightElemen
     >
       <View style={styles.content}>
         <Text style={styles.title} numberOfLines={1}>{title}</Text>
-        {subtitle && <Text style={styles.subtitle} numberOfLines={1}>{subtitle}</Text>}
+        {subtitle && <Text style={styles.subtitle} numberOfLines={4}>{subtitle}</Text>}
       </View>
       {rightElement && (
         <View style={styles.rightContainer}>

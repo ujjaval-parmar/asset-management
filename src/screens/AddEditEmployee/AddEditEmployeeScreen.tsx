@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, T
 import firestore from '@react-native-firebase/firestore';
 import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
+import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { colors } from '../../constants/theme';
 import { styles } from './styles';
 
@@ -10,7 +11,13 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
   const employeeId = route.params?.employeeId;
   const isEditing = !!employeeId;
 
+  // Form States
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [designation, setDesignation] = useState('');
+  const [department, setDepartment] = useState('');
+  const [location, setLocation] = useState('');
   const [joiningDate, setJoiningDate] = useState('');
   const [systemOwner, setSystemOwner] = useState('IT Admin');
   const [status, setStatus] = useState('Active');
@@ -18,6 +25,35 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
   const [errors, setErrors] = useState<{name?: string, joiningDate?: string}>({});
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(isEditing);
+  const [initialValues, setInitialValues] = useState<any>(null);
+
+  const PRESET_DESIGNATIONS = [
+    'HR',
+    'PHP Developer',
+    'PHP Developer Intern',
+    'ReactJS Developer',
+    'ReactJS Developer Intern',
+    'Shopify Developer',
+    'Shopify Developer Intern',
+    'React Native Developer',
+    'React Native Developer Intern'
+  ];
+
+  useEffect(() => {
+    if (!isEditing) {
+      setInitialValues({
+        name: '',
+        email: '',
+        phone: '',
+        designation: '',
+        department: '',
+        location: '',
+        joiningDate: '',
+        systemOwner: 'IT Admin',
+        status: 'Active',
+      });
+    }
+  }, [isEditing]);
 
   useEffect(() => {
     if (isEditing) {
@@ -28,10 +64,29 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
         .then(documentSnapshot => {
           if (documentSnapshot && documentSnapshot.data()) {
             const data = documentSnapshot.data();
-            setName(data?.name || '');
-            setJoiningDate(data?.joiningDate?.toDate ? data.joiningDate.toDate().toLocaleDateString() : (data?.joiningDate || ''));
-            setSystemOwner(data?.systemOwner || '');
-            setStatus(data?.status || 'Active');
+            const fetchedState = {
+              name: data?.name || '',
+              email: data?.email || '',
+              phone: data?.phone || '',
+              designation: data?.designation || '',
+              department: data?.department || '',
+              location: data?.location || '',
+              joiningDate: data?.joiningDate?.toDate ? data.joiningDate.toDate().toLocaleDateString() : (data?.joiningDate || ''),
+              systemOwner: data?.systemOwner || '',
+              status: data?.status || 'Active',
+            };
+
+            setName(fetchedState.name);
+            setEmail(fetchedState.email);
+            setPhone(fetchedState.phone);
+            setDesignation(fetchedState.designation);
+            setDepartment(fetchedState.department);
+            setLocation(fetchedState.location);
+            setJoiningDate(fetchedState.joiningDate);
+            setSystemOwner(fetchedState.systemOwner);
+            setStatus(fetchedState.status);
+
+            setInitialValues(fetchedState);
           }
           setFetching(false);
         })
@@ -55,20 +110,24 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
 
     setLoading(true);
     try {
+      const payload = {
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        designation: designation.trim(),
+        department: department.trim(),
+        location: location.trim(),
+        joiningDate: joiningDate.trim(),
+        systemOwner: systemOwner.trim(),
+        status,
+        updatedAt: firestore.FieldValue.serverTimestamp(),
+      };
+
       if (isEditing) {
-        await firestore().collection('employees').doc(employeeId).update({
-          name,
-          joiningDate,
-          systemOwner,
-          status,
-          updatedAt: firestore.FieldValue.serverTimestamp(),
-        });
+        await firestore().collection('employees').doc(employeeId).update(payload);
       } else {
         await firestore().collection('employees').add({
-          name,
-          joiningDate,
-          systemOwner,
-          status,
+          ...payload,
           createdAt: firestore.FieldValue.serverTimestamp(),
         });
       }
@@ -85,15 +144,26 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
     }
   };
 
+  const isDirty = initialValues ? (
+    name !== initialValues.name ||
+    email !== initialValues.email ||
+    phone !== initialValues.phone ||
+    designation !== initialValues.designation ||
+    department !== initialValues.department ||
+    location !== initialValues.location ||
+    joiningDate !== initialValues.joiningDate ||
+    systemOwner !== initialValues.systemOwner ||
+    status !== initialValues.status
+  ) : false;
+
   return (
     <SafeAreaView style={styles.safeArea}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton} disabled={loading}>
           <Text style={[styles.backButtonText, loading && { opacity: 0.5 }]}>{"< "}Back</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>{isEditing ? 'Edit Employee' : 'Add Employee'}</Text>
-        <View style={{ width: 40 }} /> {/* Spacer */}
+        <Text style={styles.headerTitle}>{isEditing ? 'Edit Employee' : 'New Employee'}</Text>
+        <View style={{ width: 40 }} />
       </View>
 
       <KeyboardAvoidingView 
@@ -107,6 +177,9 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
         ) : (
           <>
             <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+              
+              <Text style={[styles.statusLabel, { fontSize: 16, marginBottom: 12 }]}>Personal Information</Text>
+              
               <Input
                 label="Full Name *"
                 placeholder="e.g. John Doe"
@@ -116,6 +189,73 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
                   if (errors.name) setErrors({...errors, name: undefined});
                 }}
                 error={errors.name}
+              />
+
+              <Input
+                label="Email Address"
+                placeholder="e.g. john.doe@company.com"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+
+              <Input
+                label="Phone Number"
+                placeholder="e.g. +1 555-0198"
+                value={phone}
+                onChangeText={setPhone}
+                keyboardType="phone-pad"
+              />
+
+              <Text style={[styles.statusLabel, { fontSize: 16, marginBottom: 12, marginTop: 16 }]}>Corporate Identity</Text>
+
+              <View style={{ marginBottom: 16 }}>
+                <Text style={{ fontSize: 14, fontWeight: '500', color: colors.text, marginBottom: 4 }}>Designation</Text>
+                <Menu>
+                  <MenuTrigger>
+                    <View style={{ borderWidth: 1, borderColor: colors.border, borderRadius: 8, paddingHorizontal: 16, paddingVertical: 14, backgroundColor: colors.surface, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Text style={{ color: designation ? colors.text : colors.textLight, fontSize: 16 }}>
+                        {designation || "Select a designation"}
+                      </Text>
+                      <Text style={{ color: colors.textLight, fontSize: 12 }}>▼</Text>
+                    </View>
+                  </MenuTrigger>
+                  <MenuOptions customStyles={{ optionsContainer: { borderRadius: 8, marginTop: 45, maxHeight: 250, padding: 8 }}}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                      {PRESET_DESIGNATIONS.map((desig) => (
+                        <MenuOption 
+                          key={desig} 
+                          onSelect={() => setDesignation(desig)}
+                          customStyles={{ optionWrapper: { padding: 12 } }}
+                        >
+                          <Text style={{ fontSize: 16, color: colors.text }}>{desig}</Text>
+                        </MenuOption>
+                      ))}
+                    </ScrollView>
+                  </MenuOptions>
+                </Menu>
+              </View>
+
+              <Input
+                label="Department"
+                placeholder="e.g. Engineering"
+                value={department}
+                onChangeText={setDepartment}
+              />
+
+              <Input
+                label="Location / Office"
+                placeholder="e.g. New York HQ"
+                value={location}
+                onChangeText={setLocation}
+              />
+
+              <Input
+                label="System Owner"
+                placeholder="e.g. IT Admin"
+                value={systemOwner}
+                onChangeText={setSystemOwner}
               />
 
               <Input
@@ -129,15 +269,8 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
                 error={errors.joiningDate}
               />
 
-              <Input
-                label="System Owner"
-                placeholder="e.g. IT Admin"
-                value={systemOwner}
-                onChangeText={setSystemOwner}
-              />
-
-              <View style={styles.statusContainer}>
-                <Text style={styles.statusLabel}>Status</Text>
+              <View style={[styles.statusContainer, { marginTop: 16 }]}>
+                <Text style={styles.statusLabel}>Employment Status</Text>
                 <View style={styles.statusOptions}>
                   <TouchableOpacity
                     style={[styles.statusOption, status === 'Active' && styles.statusOptionSelected]}
@@ -169,11 +302,11 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
                 disabled={loading}
               />
               <Button 
-                title={loading ? "Saving..." : "Save"} 
+                title={loading ? "Saving..." : "Save Profile"} 
                 style={styles.footerButton} 
                 onPress={handleSave}
                 loading={loading}
-                disabled={loading}
+                disabled={loading || !isDirty}
               />
             </View>
           </>

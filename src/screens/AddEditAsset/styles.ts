@@ -33,4 +33,29 @@ export const styles = StyleSheet.create({
   },
   statusOptionText: { fontSize: 14, color: colors.text, fontWeight: '500' },
   statusOptionTextSelected: { color: colors.surface },
+  typeScrollView: {
+    paddingVertical: spacing.s,
+    marginBottom: spacing.l,
+  },
+  typeOption: {
+    paddingHorizontal: spacing.l,
+    paddingVertical: spacing.s,
+    borderRadius: 20,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border,
+    marginRight: spacing.m,
+  },
+  typeOptionSelected: {
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
+  },
+  typeOptionText: {
+    fontSize: 14,
+    color: colors.text,
+    fontWeight: '500',
+  },
+  typeOptionTextSelected: {
+    color: colors.surface,
+  },
 });
