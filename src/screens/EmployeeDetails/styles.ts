@@ -44,13 +44,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   employeeName: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
     color: colors.text,
     marginBottom: spacing.xs,
   },
   employeeDate: {
-    fontSize: 14,
+    fontSize: 13,
     color: colors.textLight,
   },
   statusBadge: {
@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
     marginBottom: spacing.xl,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: colors.text,
     marginBottom: spacing.m,
@@ -88,7 +88,7 @@ export const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   assetTag: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
     color: colors.text,
   },
@@ -109,12 +109,12 @@ export const styles = StyleSheet.create({
     color: colors.warning,
   },
   assetModel: {
-    fontSize: 16,
+    fontSize: 15,
     color: colors.text,
     marginBottom: spacing.xs,
   },
   assetType: {
-    fontSize: 14,
+    fontSize: 13,
     color: colors.textLight,
   },
   historyContainer: {
@@ -139,9 +139,10 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: borderRadius.m,
     padding: spacing.l,
     paddingBottom: spacing.xl * 2,
+    maxHeight: '90%',
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: colors.text,
     marginBottom: spacing.l,

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 import { View, Text, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { Input } from '../../components/Input/Input';
@@ -110,6 +111,26 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
 
     setLoading(true);
     try {
+      // Check for active assignments if deactivating
+      if (isEditing && (status === 'Inactive' || status === 'Resigned')) {
+        const activeSnap = await firestore()
+          .collection('assignments')
+          .where('employeeId', '==', employeeId)
+          .where('status', '==', 'active')
+          .get();
+          
+        if (!activeSnap.empty) {
+          setLoading(false);
+          Toast.show({
+            type: 'error',
+            text1: 'Assets still assigned',
+            text2: 'Please return all hardware before deactivating.',
+            position: 'bottom'
+          });
+          return;
+        }
+      }
+
       const payload = {
         name: name.trim(),
         email: email.trim(),
@@ -132,15 +153,72 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
         });
       }
       setLoading(false);
-      Alert.alert(
-        "Success", 
-        `Employee ${isEditing ? 'updated' : 'added'} successfully!`,
-        [{ text: "OK", onPress: () => navigation.goBack() }]
-      );
+      Toast.show({
+        type: 'success',
+        text1: 'Saved',
+        text2: `Employee ${isEditing ? 'updated' : 'added'} successfully!`,
+        position: 'bottom'
+      });
+      navigation.goBack();
     } catch (error) {
       setLoading(false);
       console.error("Error saving employee to Firestore: ", error);
-      Alert.alert("Error", "Failed to save employee data.");
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Failed to save employee data.',
+        position: 'bottom'
+      });
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!isEditing) return;
+
+    setLoading(true);
+    try {
+      // Safety Guard: Check for active assets
+      const activeSnap = await firestore()
+        .collection('assignments')
+        .where('employeeId', '==', employeeId)
+        .where('status', '==', 'active')
+        .get();
+        
+      if (!activeSnap.empty) {
+        setLoading(false);
+        Toast.show({
+          type: 'error',
+          text1: 'Deletion Blocked',
+          text2: 'Return all hardware before deleting employee.',
+          position: 'bottom'
+        });
+        return;
+      }
+
+      Alert.alert(
+        "Delete Profile",
+        "Are you sure you want to permanently remove this employee from records?",
+        [
+          { text: "Cancel", style: "cancel", onPress: () => setLoading(false) },
+          { 
+            text: "Delete", 
+            style: "destructive", 
+            onPress: async () => {
+              await firestore().collection('employees').doc(employeeId).delete();
+              Toast.show({
+                type: 'success',
+                text1: 'Deleted',
+                text2: 'Employee profile removed.',
+                position: 'bottom'
+              });
+              navigation.navigate('Employees');
+            } 
+          }
+        ]
+      );
+    } catch (e) {
+      setLoading(false);
+      console.error(e);
     }
   };
 
@@ -308,6 +386,15 @@ export const AddEditEmployeeScreen = ({ navigation, route }: any) => {
                 loading={loading}
                 disabled={loading || !isDirty}
               />
+              {isEditing && (
+                <TouchableOpacity 
+                  onPress={handleDelete}
+                  disabled={loading}
+                  style={{ marginTop: 12, padding: 8, alignSelf: 'center' }}
+                >
+                  <Text style={{ color: colors.error, fontWeight: '600' }}>Delete Profile</Text>
+                </TouchableOpacity>
+              )}
             </View>
           </>
         )}

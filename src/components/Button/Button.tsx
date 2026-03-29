@@ -29,7 +29,7 @@ export const Button: React.FC<ButtonProps> = ({ title, variant = 'primary', load
       ) : (
         <Text style={[
           styles.text,
-          isPrimary && styles.textLight,
+          (variant === 'primary' || variant === 'secondary') && styles.textLight,
           isOutline && styles.textPrimary,
         ]}>
           {title}

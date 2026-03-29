@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 import { View, Text, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { Input } from '../../components/Input/Input';
@@ -22,6 +23,7 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
   const [imei1, setImei1] = useState('');
   const [imei2, setImei2] = useState('');
   const [simNumber, setSimNumber] = useState('');
+  const [available, setAvailable] = useState(true);
   
   const [errors, setErrors] = useState<{model?: string}>({});
   const [loading, setLoading] = useState(false);
@@ -75,6 +77,8 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
             setOwnership(fetchedOwnership);
             
             setStatus(data?.status || 'Good');
+            
+            setAvailable(data?.isAvailable ?? true);
             
             // Nested Properties
             const fetchedSN = data?.properties?.serialNumber || '';
@@ -136,6 +140,27 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
     }
 
     try {
+      // 1. Uniqueness check for Asset Tag if provided
+      const trimmedTag = assetTag.trim();
+      if (trimmedTag) {
+        const tagQuery = await firestore()
+          .collection('assets')
+          .where('assetTag', '==', trimmedTag)
+          .get();
+        
+        const isDuplicate = tagQuery.docs.some(doc => doc.id !== assetId);
+        if (isDuplicate) {
+          setLoading(false);
+          Toast.show({
+            type: 'error',
+            text1: 'Duplicate Tag',
+            text2: `Asset Tag "${trimmedTag}" is already in use.`,
+            position: 'bottom'
+          });
+          return;
+        }
+      }
+
       if (isEditing) {
         await firestore().collection('assets').doc(assetId).update({
           assetTag: assetTag.trim() || null, // Natively null if deliberately empty
@@ -158,16 +183,71 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
         });
       }
       setLoading(false);
-      Alert.alert(
-        "Success", 
-        `Asset ${isEditing ? 'updated' : 'added'} successfully!`,
-        [{ text: "OK", onPress: () => navigation.goBack() }]
-      );
+      Toast.show({
+        type: 'success',
+        text1: 'Saved',
+        text2: `Asset ${isEditing ? 'updated' : 'added'} successfully!`,
+        position: 'bottom'
+      });
+      navigation.goBack();
     } catch (error) {
       setLoading(false);
       console.error("Error saving asset: ", error);
-      Alert.alert("Error", "Failed to save asset data.");
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Failed to save asset data.',
+        position: 'bottom'
+      });
     }
+  };
+
+  const handleDelete = () => {
+    if (!isEditing) return;
+    
+    // Safety Guard: Check if asset is assigned
+    if (!available) {
+      Toast.show({
+        type: 'error',
+        text1: 'Deletion Blocked',
+        text2: 'Return asset to inventory before deleting.',
+        position: 'bottom'
+      });
+      return;
+    }
+
+    Alert.alert(
+      "Delete Asset",
+      "Are you sure you want to permanently remove this hardware from records?",
+      [
+        { text: "Cancel", style: "cancel" },
+        { 
+          text: "Delete", 
+          style: "destructive", 
+          onPress: async () => {
+            setLoading(true);
+            try {
+              await firestore().collection('assets').doc(assetId).delete();
+              Toast.show({
+                type: 'success',
+                text1: 'Deleted',
+                text2: 'Asset removed successfully.',
+                position: 'bottom'
+              });
+              navigation.navigate('Assets');
+            } catch (err) {
+              setLoading(false);
+              Toast.show({
+                type: 'error',
+                text1: 'Error',
+                text2: 'Failed to delete asset.',
+                position: 'bottom'
+              });
+            }
+          } 
+        }
+      ]
+    );
   };
 
   const isDirty = initialValues ? (
@@ -320,6 +400,15 @@ export const AddEditAssetScreen = ({ navigation, route }: any) => {
                 loading={loading}
                 disabled={loading || !isDirty}
               />
+              {isEditing && (
+                <TouchableOpacity 
+                  onPress={handleDelete}
+                  disabled={loading}
+                  style={{ marginTop: 12, padding: 8, alignSelf: 'center' }}
+                >
+                  <Text style={{ color: colors.error, fontWeight: '600' }}>Delete Asset</Text>
+                </TouchableOpacity>
+              )}
             </View>
           </>
         )}

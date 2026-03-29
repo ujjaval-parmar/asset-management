@@ -4,8 +4,10 @@ import firestore from '@react-native-firebase/firestore';
 import { Card } from '../../components/Card/Card';
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
+import Toast from 'react-native-toast-message';
 import { ListItem } from '../../components/ListItem/ListItem';
 import { colors, spacing, borderRadius } from '../../constants/theme';
+import { getRelativeVerificationTime } from '../../utils/dateUtils';
 import { styles } from './styles';
 
 export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
@@ -19,6 +21,7 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
   const [statusModalVisible, setStatusModalVisible] = useState(false);
   const [selectedAssetForStatus, setSelectedAssetForStatus] = useState<any>(null);
   const [pendingStatusUpdate, setPendingStatusUpdate] = useState<string | null>(null);
+  const [pendingStatusNote, setPendingStatusNote] = useState('');
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
 
   // Assignment Modal states
@@ -128,6 +131,24 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
 
     setIsAssigning(true);
     try {
+      // 1. Uniqueness check for Asset Tag
+      const trimmedTag = assetTagInput.trim();
+      const existingTagQuery = await firestore()
+        .collection('assets')
+        .where('assetTag', '==', trimmedTag)
+        .get();
+
+      if (!existingTagQuery.empty) {
+        setIsAssigning(false);
+        Toast.show({
+          type: 'error',
+          text1: 'Duplicate Tag',
+          text2: `Asset Tag "${trimmedTag}" is already in use.`,
+          position: 'bottom'
+        });
+        return;
+      }
+
       const newAssignmentRef = firestore().collection('assignments').doc();
       await newAssignmentRef.set({
         assetId: selectedAvailableAsset.id,
@@ -150,10 +171,20 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
       setAssignModalVisible(false);
       setSelectedAvailableAsset(null);
       setAssetTagInput('');
-      Alert.alert('Success', 'Asset bound perfectly to the Employee profile!');
+      Toast.show({
+        type: 'success',
+        text1: 'Deployed successfully',
+        text2: 'Asset bound perfectly to the Employee profile!',
+        position: 'bottom'
+      });
     } catch (error) {
       console.error('Error assigning asset:', error);
-      Alert.alert('Error', 'Failed to assign the selected hardware.');
+      Toast.show({
+        type: 'error',
+        text1: 'Assignment Failed',
+        text2: 'Failed to assign the selected hardware.',
+        position: 'bottom'
+      });
     } finally {
       setIsAssigning(false);
     }
@@ -189,9 +220,21 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
               setStatusModalVisible(false);
               setSelectedAssetForStatus(null);
               setPendingStatusUpdate(null);
+              
+              Toast.show({
+                type: 'success',
+                text1: 'Returned successfully',
+                text2: 'Asset safely returned to inventory.',
+                position: 'bottom'
+              });
             } catch (err) {
               console.error(err);
-              Alert.alert('Error', 'Failed to successfully return hardware.');
+              Toast.show({
+                type: 'error',
+                text1: 'Return Failed',
+                text2: 'Failed to safely return hardware.',
+                position: 'bottom'
+              });
             } finally {
               setIsUpdatingStatus(false);
             }
@@ -205,9 +248,12 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
     if (!selectedAssetForStatus || !newStatus) return;
     setIsUpdatingStatus(true);
     
+    // Store backup for rollback
+    const previousAssets = [...assignedAssets];
+    
     setAssignedAssets(prev => prev.map(a => 
       a.assignmentId === selectedAssetForStatus.assignmentId 
-        ? { ...a, status: newStatus } 
+        ? { ...a, status: newStatus, lastCheckedDate: new Date(), lastCheckedNote: pendingStatusNote } 
         : a
     ));
 
@@ -216,17 +262,32 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
         .collection('assets')
         .doc(selectedAssetForStatus.assetId)
         .update({ 
-          status: newStatus, 
+          status: newStatus,
+          lastCheckedDate: firestore.FieldValue.serverTimestamp(),
+          lastCheckedNote: pendingStatusNote.trim(),
           updatedAt: firestore.FieldValue.serverTimestamp() 
         });
       
       setStatusModalVisible(false);
       setSelectedAssetForStatus(null);
       setPendingStatusUpdate(null);
-      Alert.alert("Success", "Asset status updated successfully!");
+      setPendingStatusNote('');
+      Toast.show({
+        type: 'success',
+        text1: 'Verified!',
+        text2: 'Condition status logged successfully.',
+        position: 'bottom'
+      });
     } catch (error) {
       console.error("Error updating status:", error);
-      Alert.alert("Error", "Failed to update asset status.");
+      // Rollback optimistic update
+      setAssignedAssets(previousAssets);
+      Toast.show({
+        type: 'error',
+        text1: 'Update Failed',
+        text2: 'Failed to commit updates to database. Changes reverted.',
+        position: 'bottom'
+      });
     } finally {
       setIsUpdatingStatus(false);
     }
@@ -263,6 +324,29 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
     );
   }
 
+  // Calculate Verification Ratio
+  const totalAssigned = assignedAssets.length;
+  let verifiedCount = 0;
+  assignedAssets.forEach(a => {
+    const v = getRelativeVerificationTime(a.lastCheckedDate);
+    if (!v.needsVerification) {
+      verifiedCount++;
+    }
+  });
+
+  let verificationText = '';
+  let isWarning = false;
+  if (totalAssigned > 0) {
+    if (verifiedCount === totalAssigned) {
+      verificationText = `All ${totalAssigned} Verified`;
+    } else {
+      verificationText = `${verifiedCount}/${totalAssigned} Verified\n(Action Needed)`;
+      isWarning = true;
+    }
+  } else {
+    verificationText = '0 Assigned';
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
@@ -285,6 +369,25 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
             </View>
             <View style={[styles.statusBadge, employee.status === 'Active' ? styles.statusActive : styles.statusInactive]}>
               <Text style={styles.statusText}>{employee.status || 'Active'}</Text>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, paddingTop: 16, borderTopWidth: 1, borderTopColor: colors.border }}>
+            <View style={{ alignItems: 'center', flex: 1 }}>
+              <Text style={{ fontSize: 13, color: colors.textLight, marginBottom: 4 }}>Active Assets</Text>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', color: colors.primary }}>{assignedAssets.length}</Text>
+            </View>
+            <View style={{ width: 1, backgroundColor: colors.border, marginHorizontal: 8 }} />
+            <View style={{ alignItems: 'center', flex: 1 }}>
+              <Text style={{ fontSize: 13, color: colors.textLight, marginBottom: 4 }}>History</Text>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', color: colors.text }}>{historyAssets.length}</Text>
+            </View>
+            <View style={{ width: 1, backgroundColor: colors.border, marginHorizontal: 8 }} />
+            <View style={{ alignItems: 'center', flex: 1 }}>
+              <Text style={{ fontSize: 13, color: colors.textLight, marginBottom: 4 }}>Compliance</Text>
+              <Text style={{ fontSize: 13, textAlign: 'center', fontWeight: 'bold', color: isWarning ? colors.error : (totalAssigned > 0 ? colors.success : colors.text) }}>
+                {verificationText}
+              </Text>
             </View>
           </View>
         </Card>
@@ -324,7 +427,47 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
                 <Text style={styles.assetModel}>
                   {asset.properties?.brandModel || asset.properties?.accessoryType || 'Unknown Model'}
                 </Text>
-                <Text style={styles.assetType}>{(asset.type || 'Unknown Type').toUpperCase()}</Text>
+                
+                {/* Secondary Identifiers */}
+                <View style={{ marginTop: 2, marginBottom: 4 }}>
+                  {asset.properties?.serialNumber && (
+                    <Text style={{ fontSize: 13, color: colors.textLight }}>S/N: {asset.properties.serialNumber}</Text>
+                  )}
+                  {asset.properties?.imei1 && (
+                    <Text style={{ fontSize: 13, color: colors.textLight }}>IMEI: {asset.properties.imei1}</Text>
+                  )}
+                  <Text style={{ fontSize: 13, color: colors.textLight }}>Owner: {asset.ownership ? (asset.ownership.charAt(0).toUpperCase() + asset.ownership.slice(1)) : 'Employee'}</Text>
+                </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 4 }}>
+                  <Text style={styles.assetType}>{(asset.type || 'Unknown Type').toUpperCase()}</Text>
+                  {(() => {
+                    const verification = getRelativeVerificationTime(asset.lastCheckedDate);
+                    if (verification.needsVerification && asset.lastCheckedDate) {
+                       return (
+                         <Text style={{ fontSize: 12, color: colors.error, fontWeight: 'bold' }}>
+                           NEED TO VERIFY
+                         </Text>
+                       );
+                    } else if (asset.lastCheckedDate) {
+                       return (
+                         <Text style={{ fontSize: 12, color: colors.primary, fontWeight: '500' }}>
+                           Verified: {verification.text}
+                         </Text>
+                       );
+                    }
+                    return (
+                      <Text style={{ fontSize: 12, color: colors.error, fontWeight: 'bold' }}>
+                         NEED TO VERIFY
+                      </Text>
+                    );
+                  })()}
+                </View>
+                {asset.lastCheckedNote ? (
+                  <Text style={{ fontSize: 13, color: colors.textLight, marginTop: 4, fontStyle: 'italic' }}>
+                    Note: {asset.lastCheckedNote}
+                  </Text>
+                ) : null}
               </Card>
             </TouchableOpacity>
           )})
@@ -366,10 +509,11 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
         onRequestClose={() => {
           setStatusModalVisible(false);
           setPendingStatusUpdate(null);
+          setPendingStatusNote('');
         }}
       >
         <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
+          <SafeAreaView style={styles.modalContainer}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Text style={{fontSize: 20, fontWeight: 'bold', color: colors.text}}>Asset Specifications</Text>
@@ -378,6 +522,7 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
                     onPress={() => {
                       setStatusModalVisible(false);
                       setPendingStatusUpdate(null);
+                      setPendingStatusNote('');
                       navigation.navigate('AddEditAsset', { assetId: selectedAssetForStatus.assetId });
                     }}
                     style={{ marginLeft: 12, paddingHorizontal: 8, paddingVertical: 4, backgroundColor: colors.primary + '15', borderRadius: 4 }}
@@ -386,101 +531,122 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
                   </TouchableOpacity>
                 )}
               </View>
-              <TouchableOpacity onPress={() => { setStatusModalVisible(false); setPendingStatusUpdate(null); }}>
+              <TouchableOpacity onPress={() => { setStatusModalVisible(false); setPendingStatusUpdate(null); setPendingStatusNote(''); }}>
                 <Text style={{color: colors.textLight, fontSize: 28, fontWeight: '300', marginTop: -4}}>×</Text>
               </TouchableOpacity>
             </View>
 
-            {selectedAssetForStatus && (
-              <View style={{ marginBottom: spacing.l, padding: spacing.m, backgroundColor: colors.background, borderRadius: borderRadius.m, borderWidth: 1, borderColor: colors.border }}>
-                <Text style={{ fontSize: 16, fontWeight: 'bold', color: colors.text, marginBottom: spacing.m }}>
-                  {selectedAssetForStatus.properties?.brandModel || selectedAssetForStatus.properties?.accessoryType || 'Unknown Model'}
-                </Text>
-                
-                <View style={localStyle.propRow}>
-                  <Text style={localStyle.propLabel}>Asset Tag</Text>
-                  <Text style={localStyle.propValue}>{selectedAssetForStatus.assetTag || 'N/A'}</Text>
-                </View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {selectedAssetForStatus && (
+                <View style={{ marginBottom: spacing.l, padding: spacing.m, backgroundColor: colors.background, borderRadius: borderRadius.m, borderWidth: 1, borderColor: colors.border }}>
+                  <Text style={{ fontSize: 16, fontWeight: 'bold', color: colors.text, marginBottom: spacing.m }}>
+                    {selectedAssetForStatus.properties?.brandModel || selectedAssetForStatus.properties?.accessoryType || 'Unknown Model'}
+                  </Text>
+                  
+                  <View style={localStyle.propRow}>
+                    <Text style={localStyle.propLabel}>Asset Tag</Text>
+                    <Text style={localStyle.propValue}>{selectedAssetForStatus.assetTag || 'N/A'}</Text>
+                  </View>
 
-                <View style={localStyle.propRow}>
-                  <Text style={localStyle.propLabel}>Category</Text>
-                  <Text style={localStyle.propValue}>{(selectedAssetForStatus.type || '').toUpperCase()}</Text>
-                </View>
+                  <View style={localStyle.propRow}>
+                    <Text style={localStyle.propLabel}>Category</Text>
+                    <Text style={localStyle.propValue}>{(selectedAssetForStatus.type || '').toUpperCase()}</Text>
+                  </View>
 
-                {selectedAssetForStatus.properties?.serialNumber && (
-                   <View style={localStyle.propRow}>
-                     <Text style={localStyle.propLabel}>Serial Number</Text>
-                     <Text style={localStyle.propValue}>{selectedAssetForStatus.properties.serialNumber}</Text>
-                   </View>
-                )}
-                {selectedAssetForStatus.properties?.imei1 && (
-                   <View style={localStyle.propRow}>
-                     <Text style={localStyle.propLabel}>IMEI 1</Text>
-                     <Text style={localStyle.propValue}>{selectedAssetForStatus.properties.imei1}</Text>
-                   </View>
-                )}
-                {selectedAssetForStatus.properties?.imei2 && (
-                   <View style={localStyle.propRow}>
-                     <Text style={localStyle.propLabel}>IMEI 2</Text>
-                     <Text style={localStyle.propValue}>{selectedAssetForStatus.properties.imei2}</Text>
-                   </View>
-                )}
-                <View style={[localStyle.propRow, { marginBottom: 0 }]}>
-                  <Text style={localStyle.propLabel}>Current Status</Text>
-                  <Text style={localStyle.propValue}>{selectedAssetForStatus.status || 'Good'}</Text>
-                </View>
-              </View>
-            )}
-
-            <Text style={{ fontSize: 16, fontWeight: 'bold', color: colors.text, marginBottom: spacing.m }}>Update Condition</Text>
-            
-            <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: spacing.l}}>
-              {['Good', 'Bad', 'Repair', 'Lost'].map((opt) => {
-                const isSelected = pendingStatusUpdate === opt;
-                return (
-                  <TouchableOpacity
-                    key={opt}
-                    activeOpacity={0.7}
-                    style={{
-                      width: '48%',
-                      paddingVertical: spacing.m,
-                      marginBottom: spacing.s,
-                      borderRadius: borderRadius.s,
-                      borderWidth: 1,
-                      borderColor: isSelected ? colors.primary : colors.border,
-                      backgroundColor: isSelected ? colors.primary + '15' : colors.background,
-                      alignItems: 'center'
-                    }}
-                    onPress={() => setPendingStatusUpdate(opt)}
-                  >
-                    <Text style={{ 
-                      fontSize: 14, 
-                      fontWeight: isSelected ? 'bold' : '500',
-                      color: isSelected ? colors.primary : colors.text 
-                    }}>
-                      {opt}
+                  {selectedAssetForStatus.properties?.serialNumber && (
+                    <View style={localStyle.propRow}>
+                        <Text style={localStyle.propLabel}>Serial Number</Text>
+                        <Text style={localStyle.propValue}>{selectedAssetForStatus.properties.serialNumber}</Text>
+                    </View>
+                  )}
+                  {selectedAssetForStatus.properties?.imei1 && (
+                    <View style={localStyle.propRow}>
+                        <Text style={localStyle.propLabel}>IMEI 1</Text>
+                        <Text style={localStyle.propValue}>{selectedAssetForStatus.properties.imei1}</Text>
+                    </View>
+                  )}
+                  {selectedAssetForStatus.properties?.imei2 && (
+                    <View style={localStyle.propRow}>
+                        <Text style={localStyle.propLabel}>IMEI 2</Text>
+                        <Text style={localStyle.propValue}>{selectedAssetForStatus.properties.imei2}</Text>
+                    </View>
+                  )}
+                  {selectedAssetForStatus.properties?.simNumber && (
+                    <View style={localStyle.propRow}>
+                        <Text style={localStyle.propLabel}>SIM Number</Text>
+                        <Text style={localStyle.propValue}>{selectedAssetForStatus.properties.simNumber}</Text>
+                    </View>
+                  )}
+                  <View style={localStyle.propRow}>
+                    <Text style={localStyle.propLabel}>Ownership</Text>
+                    <Text style={localStyle.propValue}>
+                        {selectedAssetForStatus.ownership ? (selectedAssetForStatus.ownership.charAt(0).toUpperCase() + selectedAssetForStatus.ownership.slice(1)) : 'Employee'}
                     </Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
+                  </View>
+                  <View style={[localStyle.propRow, { marginBottom: 0 }]}>
+                    <Text style={localStyle.propLabel}>Current Status</Text>
+                    <Text style={localStyle.propValue}>{selectedAssetForStatus.status || 'Good'}</Text>
+                  </View>
+                </View>
+              )}
 
-            <Button 
-              title={isUpdatingStatus ? "Applying..." : "Apply Status Change"} 
-              onPress={() => handleStatusUpdate(pendingStatusUpdate!)}
-              loading={isUpdatingStatus}
-              disabled={isUpdatingStatus || (pendingStatusUpdate === selectedAssetForStatus?.status)}
-              style={{ marginBottom: spacing.l }}
-            />
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: colors.text, marginBottom: spacing.m }}>Update Condition</Text>
+              
+              <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: spacing.l}}>
+                {['Good', 'Bad', 'Repair', 'Lost'].map((opt) => {
+                  const isSelected = pendingStatusUpdate === opt;
+                  return (
+                    <TouchableOpacity
+                      key={opt}
+                      activeOpacity={0.7}
+                      style={{
+                        width: '48%',
+                        paddingVertical: spacing.m,
+                        marginBottom: spacing.s,
+                        borderRadius: borderRadius.s,
+                        borderWidth: 1,
+                        borderColor: isSelected ? colors.primary : colors.border,
+                        backgroundColor: isSelected ? colors.primary + '15' : colors.background,
+                        alignItems: 'center'
+                      }}
+                      onPress={() => setPendingStatusUpdate(opt)}
+                    >
+                      <Text style={{ 
+                        fontSize: 14, 
+                        fontWeight: isSelected ? 'bold' : '500',
+                        color: isSelected ? colors.primary : colors.text 
+                      }}>
+                        {opt}
+                      </Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
 
-            <Button
-              title="⟲ Return to Inventory" 
-              variant="outline"
-              onPress={handleReturnAsset}
-              disabled={isUpdatingStatus}
-              style={{ borderColor: colors.error }}
-            />
-          </View>
+              <Input
+                label="Verification Note (Optional)"
+                placeholder="e.g. Screen has a minor scratch, works fine"
+                value={pendingStatusNote}
+                onChangeText={setPendingStatusNote}
+              />
+
+              <Button 
+                title={isUpdatingStatus ? "Verifying..." : "Verify & Update Status"} 
+                onPress={() => handleStatusUpdate(pendingStatusUpdate!)}
+                loading={isUpdatingStatus}
+                disabled={isUpdatingStatus || !pendingStatusUpdate}
+                style={{ marginBottom: spacing.l }}
+              />
+
+              <Button
+                title="⟲ Return to Inventory" 
+                variant="outline"
+                onPress={handleReturnAsset}
+                disabled={isUpdatingStatus}
+                style={{ borderColor: colors.error, marginBottom: 40 }}
+              />
+            </ScrollView>
+          </SafeAreaView>
         </View>
       </Modal>
 
@@ -517,7 +683,7 @@ export const EmployeeDetailsScreen = ({ route, navigation }: any) => {
                   <TouchableOpacity onPress={() => setSelectedAvailableAsset(item)}>
                     <ListItem
                       title={model}
-                      subtitle={`Category: ${item.type || 'N/A'}`}
+                      subtitle={[`Category: ${item.type || 'N/A'}`]}
                       rightElement={<Text style={{ color: colors.primary, fontWeight: '600' }}>Assign</Text>}
                     />
                   </TouchableOpacity>

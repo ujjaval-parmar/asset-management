@@ -48,13 +48,13 @@ export const styles = StyleSheet.create({
     marginBottom: spacing.s,
   },
   assetTag: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '700',
     color: colors.text,
     marginBottom: 4,
   },
   assetType: {
-    fontSize: 14,
+    fontSize: 13,
     color: colors.textLight,
   },
   statusBadge: {
@@ -76,7 +76,7 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '700',
     color: colors.text,
     marginBottom: spacing.m,
@@ -90,11 +90,11 @@ export const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   propertyLabel: {
-    fontSize: 14,
+    fontSize: 13,
     color: colors.textLight,
   },
   propertyValue: {
-    fontSize: 14,
+    fontSize: 13,
     color: colors.text,
     fontWeight: '500',
   },

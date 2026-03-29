@@ -5,11 +5,12 @@ import { colors, spacing, borderRadius } from '../../constants/theme';
 interface InputProps extends TextInputProps {
   label?: string;
   error?: string;
+  containerStyle?: object;
 }
 
-export const Input: React.FC<InputProps> = ({ label, error, style, ...props }) => {
+export const Input: React.FC<InputProps> = ({ label, error, style, containerStyle, ...props }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       {label && <Text style={styles.label}>{label}</Text>}
       <TextInput
         style={[styles.input, error && styles.inputError, style]}

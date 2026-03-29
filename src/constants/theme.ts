@@ -1,6 +1,6 @@
 export const colors = {
   primary: '#0A7EA4',
-  secondary: '#FF7043',
+  secondary: '#0288D1', // Vibrant Blue matching the professional theme
   background: '#F5F5F5',
   surface: '#FFFFFF',
   text: '#333333',
@@ -8,7 +8,7 @@ export const colors = {
   border: '#E0E0E0',
   error: '#FF5252',
   success: '#4CAF50',
-  warning: '#FFC107',
+  warning: '#607D8B', // Soft Blue-Grey for warnings to maintain Blue/White feel
 };
 
 export const spacing = {
