@@ -11,8 +11,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="MainTabs" component={BottomTabNavigator} options={{ headerShown: false }} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="MainTabs" component={BottomTabNavigator} />
       <Stack.Screen name="EmployeeDetails" component={EmployeeDetailsScreen} />
       <Stack.Screen name="AddEditEmployee" component={AddEditEmployeeScreen} />
       <Stack.Screen name="AssetDetails" component={AssetDetailsScreen} />
